@@ -3,10 +3,22 @@ import 'package:flutter/services.dart';
 import 'package:glassmorphism/glassmorphism.dart';
 import 'package:lottie/lottie.dart';
 
-void main() {
- // SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
-  runApp(
-    MaterialApp(
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  if (kIsWeb) {
+    await Firebase.initializeApp(
+      options: const FirebaseOptions(
+        apiKey: '',
+        appId: '',
+        messagingSenderId: '',
+        projectId: '',
+        storageBucket: "",
+      ),
+    );
+  } else {
+    await Firebase.initializeApp();
+  }
+  runApp(MaterialApp(
     home: MyApp(),
     debugShowCheckedModeBanner: false,
   ));
@@ -25,6 +37,7 @@ class _MyAppState extends State<MyApp> {
     //log('Entering full screen mode...');
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,12 +51,12 @@ class _MyAppState extends State<MyApp> {
               child: Column(
                 children: [
                   Container(
-                          margin: EdgeInsets.all(50),
-                          height: 150,
-                          width: 150,
-                          child: Lottie.network(
-                              'https://assets4.lottiefiles.com/private_files/lf30_YlODxz.json'),
-                        ),
+                    margin: EdgeInsets.all(50),
+                    height: 150,
+                    width: 150,
+                    child: Lottie.network(
+                        'https://assets4.lottiefiles.com/private_files/lf30_YlODxz.json'),
+                  ),
                   Padding(
                     padding: const EdgeInsets.all(20),
                     child: GlassmorphicContainer(
@@ -74,9 +87,8 @@ class _MyAppState extends State<MyApp> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          
                           //child: Image.network("https://cdn.analyticsvidhya.com/wp-content/uploads/2020/12/166651_5_t4EJl1Iy9B1w5EtX1Zog.jpeg")),
-                         
+
                           Container(
                             child: Padding(
                               padding: const EdgeInsets.all(30.0),
@@ -90,8 +102,8 @@ class _MyAppState extends State<MyApp> {
                                     color: Colors.white,
                                   ),
                                   enabledBorder: OutlineInputBorder(
-                                    borderSide:
-                                        BorderSide(width: 3, color: Colors.greenAccent),
+                                    borderSide: BorderSide(
+                                        width: 3, color: Colors.greenAccent),
                                     borderRadius: BorderRadius.circular(40.0),
                                   ),
                                 ),
@@ -114,8 +126,8 @@ class _MyAppState extends State<MyApp> {
                                     color: Colors.white,
                                   ),
                                   enabledBorder: OutlineInputBorder(
-                                    borderSide:
-                                        BorderSide(width: 3, color: Colors.greenAccent),
+                                    borderSide: BorderSide(
+                                        width: 3, color: Colors.greenAccent),
                                     borderRadius: BorderRadius.circular(40.0),
                                   ),
                                 ),
@@ -129,7 +141,8 @@ class _MyAppState extends State<MyApp> {
                               onPressed: () {},
                               style: ButtonStyle(
                                 backgroundColor:
-                                    MaterialStateProperty.all<Color>(Colors.white),
+                                    MaterialStateProperty.all<Color>(
+                                        Colors.white),
                                 shape: MaterialStateProperty.all(
                                   RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(30.0),
@@ -143,7 +156,9 @@ class _MyAppState extends State<MyApp> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 10,),
+                          SizedBox(
+                            height: 10,
+                          ),
                           Text(
                             "OR",
                             style: TextStyle(color: Colors.white),
@@ -155,13 +170,25 @@ class _MyAppState extends State<MyApp> {
                             "Sign in with",
                             style: TextStyle(color: Colors.white),
                           ),
-                          SizedBox(height: 10,),
+                          SizedBox(
+                            height: 10,
+                          ),
                           Container(
                             child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                 TextButton(onPressed: () {}, child: CircleAvatar(backgroundImage: NetworkImage("https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"),)),
-                                 TextButton(onPressed: () {}, child: CircleAvatar(backgroundImage: NetworkImage("https://play-lh.googleusercontent.com/6UgEjh8Xuts4nwdWzTnWH8QtLuHqRMUB7dp24JYVE2xcYzq4HA8hFfcAbU-R-PC_9uA1"),))
+                                  TextButton(
+                                      onPressed: () {},
+                                      child: CircleAvatar(
+                                        backgroundImage: NetworkImage(
+                                            "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"),
+                                      )),
+                                  TextButton(
+                                      onPressed: () {},
+                                      child: CircleAvatar(
+                                        backgroundImage: NetworkImage(
+                                            "https://play-lh.googleusercontent.com/6UgEjh8Xuts4nwdWzTnWH8QtLuHqRMUB7dp24JYVE2xcYzq4HA8hFfcAbU-R-PC_9uA1"),
+                                      ))
                                 ]),
                           )
                         ],
