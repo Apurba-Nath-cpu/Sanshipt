@@ -135,8 +135,9 @@ class _SigninState extends State<Signin> {
                                 Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => const Home()),
-                                )
+                                      builder: (context) => const Home()
+                                  ),
+                                ),
                               },
                               style: ButtonStyle(
                                 backgroundColor:
@@ -170,13 +171,16 @@ class _SigninState extends State<Signin> {
                                     Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => const Signup()),
+                                          builder: (context) => const Signup()
+                                      ),
                                     );
                                   },
                                   child: const Text("Sign Up",
                                       style: TextStyle(
                                           color: Colors.white,
-                                          fontWeight: FontWeight.bold))),
+                                          fontWeight: FontWeight.bold)
+                                  ),
+                              ),
                             ],
                           ),
                         ],
@@ -187,6 +191,7 @@ class _SigninState extends State<Signin> {
               ),
             ),
           ),
-        ));
+        ),
+    );
   }
 }

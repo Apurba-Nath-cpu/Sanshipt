@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:sanshipt/screens/signup.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -11,7 +12,13 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   void signout() async {
-    FirebaseAuth.instance.signOut();
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+          builder: (context) => const Signup(),
+      ),
+    );
+    // await FirebaseAuth.instance.signOut();
   }
 
   Widget build(BuildContext context) {
@@ -26,7 +33,7 @@ class _HomeState extends State<Home> {
             ),
             ElevatedButton(
               onPressed: () => signout(),
-              child: Text('Log Out'),
+              child: const Text('Log Out'),
             ),
           ],
         ),
