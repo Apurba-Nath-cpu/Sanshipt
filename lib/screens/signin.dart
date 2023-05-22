@@ -1,16 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:glassmorphism/glassmorphism.dart';
 import 'package:lottie/lottie.dart';
-import 'package:sanshipt/home.dart';
-import 'package:sanshipt/signin.dart';
-class Signup extends StatefulWidget {
-  const Signup({super.key});
+import 'package:sanshipt/screens/home.dart';
+import 'package:sanshipt/screens/signup.dart';
 
-  @override
-  State<Signup> createState() => _SignupState();
+void main() {
+  runApp(const MaterialApp(home: Signin()));
 }
 
-class _SignupState extends State<Signup> {
+class Signin extends StatefulWidget {
+  const Signin({super.key});
+
+  @override
+  State<Signin> createState() => _SigninState();
+}
+
+class _SigninState extends State<Signin> {
+
+  bool _isLoading = false;
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +41,7 @@ class _SignupState extends State<Signup> {
               child: Column(
                 children: [
                   Container(
-                    margin: EdgeInsets.all(50),
+                    margin: const EdgeInsets.all(50),
                     height: 150,
                     width: 150,
                     child: Lottie.network(
@@ -37,10 +54,10 @@ class _SignupState extends State<Signup> {
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                           colors: [
-                            Color(0xFFffffff).withOpacity(0.1),
-                            Color(0xFFFFFFFF).withOpacity(0.05),
+                            const Color(0xFFffffff).withOpacity(0.1),
+                            const Color(0xFFFFFFFF).withOpacity(0.05),
                           ],
-                          stops: [
+                          stops: const [
                             0.1,
                             1,
                           ]),
@@ -48,8 +65,8 @@ class _SignupState extends State<Signup> {
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                         colors: [
-                          Color(0xFFffffff).withOpacity(0.5),
-                          Color((0xFFFFFFFF)).withOpacity(0.5),
+                          const Color(0xFFffffff).withOpacity(0.5),
+                          const Color((0xFFFFFFFF)).withOpacity(0.5),
                         ],
                       ),
                       blur: 20,
@@ -63,59 +80,57 @@ class _SignupState extends State<Signup> {
                           //child: Image.network("https://cdn.analyticsvidhya.com/wp-content/uploads/2020/12/166651_5_t4EJl1Iy9B1w5EtX1Zog.jpeg")),
 
                           Container(
+                            alignment: Alignment.center,
                             child: Padding(
                               padding: const EdgeInsets.all(30.0),
                               child: TextField(
-                                style: TextStyle(color: Colors.white),
+                                controller: _emailController,
+                                style: const TextStyle(color: Colors.white),
                                 decoration: InputDecoration(
                                   hintText: "E-mail",
-                                  hintStyle: TextStyle(color: Colors.white),
-                                  prefixIcon: Icon(
+                                  hintStyle: const TextStyle(color: Colors.white),
+                                  prefixIcon: const Icon(
                                     Icons.email,
                                     color: Colors.white,
                                   ),
                                   enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                         width: 3, color: Colors.greenAccent),
                                     borderRadius: BorderRadius.circular(40.0),
                                   ),
                                 ),
                               ),
                             ),
-                            alignment: Alignment.center,
                           ),
                           Container(
+                            alignment: Alignment.center,
                             child: Padding(
                               padding: const EdgeInsets.all(30.0),
                               child: TextField(
-                                style: TextStyle(color: Colors.white),
+                                controller: _passwordController,
+                                style: const TextStyle(color: Colors.white),
                                 obscureText: true,
                                 decoration: InputDecoration(
                                   hintText: "Password",
-                                  hintStyle: TextStyle(color: Colors.white),
+                                  hintStyle: const TextStyle(color: Colors.white),
                                   fillColor: Colors.white,
-                                  prefixIcon: Icon(
+                                  prefixIcon: const Icon(
                                     Icons.key,
                                     color: Colors.white,
                                   ),
                                   enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                         width: 3, color: Colors.greenAccent),
                                     borderRadius: BorderRadius.circular(40.0),
                                   ),
                                 ),
                               ),
                             ),
-                            alignment: Alignment.center,
                           ),
                           Container(
                             width: 100,
                             child: ElevatedButton(
-                              onPressed: () {Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => const Home()),
-                                    );},
+                              onPressed: () => {},
                               style: ButtonStyle(
                                 backgroundColor:
                                     MaterialStateProperty.all<Color>(
@@ -127,20 +142,18 @@ class _SignupState extends State<Signup> {
                                   ),
                                 ),
                               ),
-                              child: Text(
-                                'Sign up',
+                              child: const Text(
+                                'Sign in',
                                 style: TextStyle(color: Colors.blue),
                               ),
                             ),
                           ),
-                          SizedBox(
-                            height: 10,
-                          ),
+                          const SizedBox(height: 20,),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(
-                                "Already signed up ? ",
+                              const Text(
+                                "New user ? ",
                                 style: TextStyle(color: Colors.white),
                               ),
                               GestureDetector(
@@ -148,51 +161,17 @@ class _SignupState extends State<Signup> {
                                     Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => const Signin()),
+                                          builder: (context) => const Signup()),
                                     );
-                                    ;
                                   },
-                                  child: Text("Sign in",
+                                  child: const Text("Sign Up",
                                       style: TextStyle(
                                           color: Colors.white,
-                                          fontWeight: FontWeight.bold)))
+                                          fontWeight: FontWeight.bold)
+                                  )
+                              ),
                             ],
                           ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            "OR",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            "Sign in with",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Container(
-                            child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  TextButton(
-                                      onPressed: () {},
-                                      child: CircleAvatar(
-                                        backgroundImage: NetworkImage(
-                                            "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"),
-                                      )),
-                                  TextButton(
-                                      onPressed: () {},
-                                      child: CircleAvatar(
-                                        backgroundImage: NetworkImage(
-                                            "https://play-lh.googleusercontent.com/6UgEjh8Xuts4nwdWzTnWH8QtLuHqRMUB7dp24JYVE2xcYzq4HA8hFfcAbU-R-PC_9uA1"),
-                                      ))
-                                ]),
-                          )
                         ],
                       ),
                     ),

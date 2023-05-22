@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "781638059737",
+    "project_id": "sanshipt-5232c",
+    "storage_bucket": "sanshipt-5232c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:781638059737:android:76c1dce014ad4d8ad460c8",
+        "android_client_info": {
+          "package_name": "com.example.sanshipt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "781638059737-t76lulsnhko954evlifvub6inqk1120v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgbxD81amoZVtGpi_vGYM8yETNnd_BiNE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "781638059737-t76lulsnhko954evlifvub6inqk1120v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
