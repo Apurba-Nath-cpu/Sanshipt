@@ -9,6 +9,7 @@ import 'package:sanshipt/screens/signin.dart';
 import 'package:image_picker/image_picker.dart';
 import '../resources/auth_methods.dart';
 import '../utils/utils.dart';
+
 class Signup extends StatefulWidget {
   const Signup({super.key});
 
@@ -60,10 +61,9 @@ class _SignupState extends State<Signup> {
     );
     print(res);
     print('looooooooool');
-    if(res != 'success'){
+    if (res != 'success') {
       // showSnackBar(res, context);
-    }
-    else{
+    } else {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) => Home(),
@@ -74,6 +74,7 @@ class _SignupState extends State<Signup> {
       _isLoading = false;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -133,52 +134,57 @@ class _SignupState extends State<Signup> {
                               child: Container(
                                 child: _image != null
                                     ? Material(
-                                  borderRadius: BorderRadius.circular(
-                                      MediaQuery.of(context).size.height +
-                                          MediaQuery.of(context)
-                                              .size
-                                              .width),
-                                  child: CircleAvatar(
-                                    radius:
-                                    MediaQuery.of(context).size.height *
-                                        0.041,
-                                    backgroundColor: Colors.greenAccent,
-                                    child: CircleAvatar(
-                                      radius: MediaQuery.of(context)
-                                          .size
-                                          .height *
-                                          0.038,
-                                      backgroundImage: MemoryImage(_image!),
-                                    ),
-                                  ),
-                                )
+                                        borderRadius: BorderRadius.circular(
+                                            MediaQuery.of(context).size.height +
+                                                MediaQuery.of(context)
+                                                    .size
+                                                    .width),
+                                        child: CircleAvatar(
+                                          radius: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.041,
+                                          backgroundColor: Colors.greenAccent,
+                                          child: CircleAvatar(
+                                            radius: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                0.038,
+                                            backgroundImage:
+                                                MemoryImage(_image!),
+                                          ),
+                                        ),
+                                      )
                                     : Material(
-                                  borderRadius: BorderRadius.circular(
-                                      MediaQuery.of(context).size.height +
-                                          MediaQuery.of(context)
-                                              .size
-                                              .width),
-                                  child: CircleAvatar(
-                                    radius:
-                                    MediaQuery.of(context).size.height *
-                                        0.041,
-                                    backgroundImage: const AssetImage(
-                                        'assets/null_dp.png'),
-                                  ),
-                                ),
+                                        borderRadius: BorderRadius.circular(
+                                            MediaQuery.of(context).size.height +
+                                                MediaQuery.of(context)
+                                                    .size
+                                                    .width),
+                                        child: CircleAvatar(
+                                          radius: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.041,
+                                          backgroundImage: const AssetImage(
+                                              'assets/null_dp.png'),
+                                        ),
+                                      ),
                               ),
                             ),
                           ),
                           Container(
                             alignment: Alignment.center,
                             child: Padding(
-                              padding: const EdgeInsets.fromLTRB(30, 20, 30, 10),
+                              padding:
+                                  const EdgeInsets.fromLTRB(30, 20, 30, 10),
                               child: TextField(
                                 controller: _emailController,
                                 style: const TextStyle(color: Colors.white),
                                 decoration: InputDecoration(
                                   hintText: "E-mail",
-                                  hintStyle: const TextStyle(color: Colors.white),
+                                  hintStyle:
+                                      const TextStyle(color: Colors.white),
                                   prefixIcon: const Icon(
                                     Icons.email,
                                     color: Colors.white,
@@ -195,14 +201,16 @@ class _SignupState extends State<Signup> {
                           Container(
                             alignment: Alignment.center,
                             child: Padding(
-                              padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
+                              padding:
+                                  const EdgeInsets.fromLTRB(30, 10, 30, 10),
                               child: TextField(
                                 controller: _passwordController,
                                 style: const TextStyle(color: Colors.white),
                                 obscureText: true,
                                 decoration: InputDecoration(
                                   hintText: "Password",
-                                  hintStyle: const TextStyle(color: Colors.white),
+                                  hintStyle:
+                                      const TextStyle(color: Colors.white),
                                   fillColor: Colors.white,
                                   prefixIcon: const Icon(
                                     Icons.key,
@@ -220,7 +228,13 @@ class _SignupState extends State<Signup> {
                           Container(
                             width: 100,
                             child: ElevatedButton(
-                              onPressed: () => signupUser(),
+                              onPressed: () {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const Home()),
+                                );
+                              },
                               style: ButtonStyle(
                                 backgroundColor:
                                     MaterialStateProperty.all<Color>(
@@ -234,14 +248,14 @@ class _SignupState extends State<Signup> {
                               ),
                               child: _isLoading
                                   ? const Center(
-                                    child: CircularProgressIndicator(
-                                      color: Color.fromARGB(255, 0, 51, 76),
-                                    ),
-                                  )
+                                      child: CircularProgressIndicator(
+                                        color: Color.fromARGB(255, 0, 51, 76),
+                                      ),
+                                    )
                                   : const Text(
-                                'Sign up',
-                                style: TextStyle(color: Colors.blue),
-                              ),
+                                      'Sign up',
+                                      style: TextStyle(color: Colors.blue),
+                                    ),
                             ),
                           ),
                           const SizedBox(
@@ -265,9 +279,7 @@ class _SignupState extends State<Signup> {
                                   child: const Text("Sign in",
                                       style: TextStyle(
                                           color: Colors.white,
-                                          fontWeight: FontWeight.bold)
-                                  )
-                              ),
+                                          fontWeight: FontWeight.bold))),
                             ],
                           ),
                           const SizedBox(

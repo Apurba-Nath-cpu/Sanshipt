@@ -16,7 +16,6 @@ class Signin extends StatefulWidget {
 }
 
 class _SigninState extends State<Signin> {
-
   bool _isLoading = false;
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -88,7 +87,8 @@ class _SigninState extends State<Signin> {
                                 style: const TextStyle(color: Colors.white),
                                 decoration: InputDecoration(
                                   hintText: "E-mail",
-                                  hintStyle: const TextStyle(color: Colors.white),
+                                  hintStyle:
+                                      const TextStyle(color: Colors.white),
                                   prefixIcon: const Icon(
                                     Icons.email,
                                     color: Colors.white,
@@ -112,7 +112,8 @@ class _SigninState extends State<Signin> {
                                 obscureText: true,
                                 decoration: InputDecoration(
                                   hintText: "Password",
-                                  hintStyle: const TextStyle(color: Colors.white),
+                                  hintStyle:
+                                      const TextStyle(color: Colors.white),
                                   fillColor: Colors.white,
                                   prefixIcon: const Icon(
                                     Icons.key,
@@ -130,7 +131,13 @@ class _SigninState extends State<Signin> {
                           Container(
                             width: 100,
                             child: ElevatedButton(
-                              onPressed: () => {},
+                              onPressed: () => {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const Home()),
+                                )
+                              },
                               style: ButtonStyle(
                                 backgroundColor:
                                     MaterialStateProperty.all<Color>(
@@ -148,7 +155,9 @@ class _SigninState extends State<Signin> {
                               ),
                             ),
                           ),
-                          const SizedBox(height: 20,),
+                          const SizedBox(
+                            height: 20,
+                          ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -167,9 +176,7 @@ class _SigninState extends State<Signin> {
                                   child: const Text("Sign Up",
                                       style: TextStyle(
                                           color: Colors.white,
-                                          fontWeight: FontWeight.bold)
-                                  )
-                              ),
+                                          fontWeight: FontWeight.bold))),
                             ],
                           ),
                         ],
