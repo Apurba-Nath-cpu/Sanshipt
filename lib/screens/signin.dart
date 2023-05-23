@@ -4,6 +4,8 @@ import 'package:lottie/lottie.dart';
 import 'package:sanshipt/screens/home.dart';
 import 'package:sanshipt/screens/signup.dart';
 
+import '../resources/auth_methods.dart';
+
 void main() {
   runApp(const MaterialApp(home: Signin()));
 }
@@ -25,6 +27,30 @@ class _SigninState extends State<Signin> {
     super.dispose();
     _emailController.dispose();
     _passwordController.dispose();
+  }
+
+  void signinUser() async {
+    print(_emailController.text);
+    setState(() {
+      _isLoading = true;
+    });
+    print('in-login');
+    String res = await AuthMethods().loginUser(
+      email: _emailController.text,
+      password: _passwordController.text,
+    );
+    if (res != 'success') {
+      print(res);
+    } else {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => Home(),
+        ),
+      );
+    }
+    setState(() {
+      _isLoading = false;
+    });
   }
 
   @override
@@ -71,7 +97,7 @@ class _SigninState extends State<Signin> {
                       blur: 20,
                       border: 2,
                       borderRadius: 20,
-                      height: 500,
+                      height: 540,
                       width: 500,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -131,14 +157,7 @@ class _SigninState extends State<Signin> {
                           Container(
                             width: 100,
                             child: ElevatedButton(
-                              onPressed: () => {
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const Home()
-                                  ),
-                                ),
-                              },
+                              onPressed: () => signinUser(),
                               style: ButtonStyle(
                                 backgroundColor:
                                     MaterialStateProperty.all<Color>(
@@ -150,14 +169,20 @@ class _SigninState extends State<Signin> {
                                   ),
                                 ),
                               ),
-                              child: const Text(
+                              child: _isLoading
+                                  ? const Center(
+                                child: CircularProgressIndicator(
+                                  color: Color.fromARGB(255, 0, 51, 76),
+                                ),
+                              )
+                                  : const Text(
                                 'Sign in',
                                 style: TextStyle(color: Colors.blue),
                               ),
                             ),
                           ),
                           const SizedBox(
-                            height: 20,
+                            height: 30,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,

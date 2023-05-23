@@ -29,7 +29,6 @@ class _SignupState extends State<Signup> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
-  final TextEditingController _bioController = TextEditingController();
 
   @override
   void dispose() {
@@ -38,7 +37,6 @@ class _SignupState extends State<Signup> {
     _emailController.dispose();
     _passwordController.dispose();
     _usernameController.dispose();
-    _bioController.dispose();
   }
 
   void selectImage() async {
@@ -52,11 +50,12 @@ class _SignupState extends State<Signup> {
     setState(() {
       _isLoading = true;
     });
-    String res = await AuthMethods().signUpUser(
+    print('${_emailController.text}');
+    String res = 'failure';
+    res = await AuthMethods().signUpUser(
       email: _emailController.text,
       password: _passwordController.text,
       username: _usernameController.text,
-      bio: _bioController.text,
       file: _image!,
     );
     print(res);
@@ -119,7 +118,7 @@ class _SignupState extends State<Signup> {
                       blur: 20,
                       border: 2,
                       borderRadius: 20,
-                      height: 500,
+                      height: 540,
                       width: 500,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -177,7 +176,7 @@ class _SignupState extends State<Signup> {
                             alignment: Alignment.center,
                             child: Padding(
                               padding:
-                                  const EdgeInsets.fromLTRB(30, 20, 30, 10),
+                                  const EdgeInsets.fromLTRB(30, 10, 30, 10),
                               child: TextField(
                                 controller: _emailController,
                                 style: const TextStyle(color: Colors.white),
@@ -187,6 +186,31 @@ class _SignupState extends State<Signup> {
                                       const TextStyle(color: Colors.white),
                                   prefixIcon: const Icon(
                                     Icons.email,
+                                    color: Colors.white,
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                        width: 3, color: Colors.greenAccent),
+                                    borderRadius: BorderRadius.circular(40.0),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            alignment: Alignment.center,
+                            child: Padding(
+                              padding:
+                              const EdgeInsets.fromLTRB(30, 10, 30, 10),
+                              child: TextField(
+                                controller: _usernameController,
+                                style: const TextStyle(color: Colors.white),
+                                decoration: InputDecoration(
+                                  hintText: "Username",
+                                  hintStyle:
+                                  const TextStyle(color: Colors.white),
+                                  prefixIcon: const Icon(
+                                    Icons.person,
                                     color: Colors.white,
                                   ),
                                   enabledBorder: OutlineInputBorder(
@@ -228,13 +252,7 @@ class _SignupState extends State<Signup> {
                           Container(
                             width: 100,
                             child: ElevatedButton(
-                              onPressed: () {
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const Home()),
-                                );
-                              },
+                              onPressed: () => signupUser(),
                               style: ButtonStyle(
                                 backgroundColor:
                                     MaterialStateProperty.all<Color>(
