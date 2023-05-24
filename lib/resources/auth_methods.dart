@@ -24,7 +24,6 @@ class AuthMethods {
     required String email,
     required String password,
     required String username,
-    required String bio,
     required Uint8List file,
   }) async {
     String res = "Some error occured";
@@ -34,17 +33,22 @@ class AuthMethods {
           username.isNotEmpty &&
           file != null) {
         print("In-if");
+        print('${email}');
+        // email = 'test3@gmail.com';
+        print('${email}');
         // register user
         UserCredential cred = await _auth.createUserWithEmailAndPassword(
           email: email,
           password: password,
         );
+        print("Registered");
 
         print(cred.user?.uid);
         print("Mid-if");
 
         String photoUrl = await StorageMethods()
             .uploadImageTostorage('profilePics', file, false);
+        print('Mid-2');
 
         // add user to our database
 
@@ -60,15 +64,15 @@ class AuthMethods {
             .doc(cred.user!.uid)
             .set(user.toJson());
         print("Out-if");
-        await _firestore.collection('users').add({
-          'username': username,
-          'uid': cred.user!.uid,
-          'email': email,
-          // 'bio': bio,
-          // 'followers': [],
-          // 'following': [],
-          'photoUrl': file,
-        });
+        // await _firestore.collection('users').add({
+        //   'username': username,
+        //   'uid': cred.user!.uid,
+        //   'email': email,
+        //   // 'bio': bio,
+        //   // 'followers': [],
+        //   // 'following': [],
+        //   'photoUrl': file,
+        // });
 
         res = "success";
       }
@@ -85,6 +89,13 @@ class AuthMethods {
     required String password,
   }) async {
     String res = "Some error occurred";
+
+    print('${email}');
+    String email2 = 'test3@gmail.com';
+    if(email == email2){
+      print('equal');
+    }
+    print('${email}');
 
     try {
       if (email.isNotEmpty && password.isNotEmpty) {
