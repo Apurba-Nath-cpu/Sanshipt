@@ -45,6 +45,7 @@ dependencies:
   uuid: ^3.0.7
   firebase_core: ^2.13.0
   image_picker: ^0.8.7+5
+  http: ^0.13.6
 
 dev_dependencies:
   flutter_test:
