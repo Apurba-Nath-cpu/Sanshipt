@@ -37,7 +37,9 @@ class _HomeState extends State<Home> {
         'input_text': input_text,
         'model': 'T5',
         'min_length': 40,
-        'max_length': 80
+        'max_length': 80,
+        //input_type: 'text' or 'url'
+        'input_type': 'text',
       })
     );
     print('${jsonDecode(response.body)['output_text']}');
