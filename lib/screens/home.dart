@@ -23,15 +23,7 @@ class _HomeState extends State<Home> {
   bool button = true; // show summarize button
   bool urlcol = true;
   bool textcol = false;
-  void signout() async {
-    await FirebaseAuth.instance.signOut();
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const Signup(),
-      ),
-    );
-  }
+
 
   Widget build(BuildContext context) {
     return Material(
@@ -233,7 +225,7 @@ class _HomeState extends State<Home> {
                                     color: Colors.black, fontSize: 20),
                                 cursorColor: Colors.black,
                                 keyboardType: TextInputType.multiline,
-                                maxLines: 3,
+                                maxLines: 8,
                                 onChanged: (val) {
                                   setState(() {
                                     input = val;

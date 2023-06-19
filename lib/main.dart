@@ -1,15 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:glassmorphism/glassmorphism.dart';
-import 'package:lottie/lottie.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:sanshipt/resources/auth_methods.dart';
-import 'package:sanshipt/screens/Login.dart';
 import 'package:sanshipt/screens/home.dart';
-import 'package:sanshipt/screens/signin.dart';
 import 'package:sanshipt/screens/signup.dart';
 
 void main() async {

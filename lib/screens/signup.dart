@@ -77,7 +77,7 @@ class _SignupState extends State<Signup> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.blue[900],
+        backgroundColor: Color.fromARGB(255, 131, 198, 156),
         body: GestureDetector(
           onTap: () {
             FocusManager.instance.primaryFocus?.unfocus();
@@ -179,18 +179,18 @@ class _SignupState extends State<Signup> {
                                   const EdgeInsets.fromLTRB(30, 10, 30, 10),
                               child: TextField(
                                 controller: _emailController,
-                                style: const TextStyle(color: Colors.white),
+                                style: const TextStyle(color: Colors.black),
                                 decoration: InputDecoration(
                                   hintText: "E-mail",
                                   hintStyle:
-                                      const TextStyle(color: Colors.white),
+                                      const TextStyle(color: Colors.grey,fontWeight: FontWeight.w500),
                                   prefixIcon: const Icon(
                                     Icons.email,
-                                    color: Colors.white,
+                                    color: Colors.grey,
                                   ),
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: const BorderSide(
-                                        width: 3, color: Colors.greenAccent),
+                                        width: 1, color: Colors.grey),
                                     borderRadius: BorderRadius.circular(40.0),
                                   ),
                                 ),
@@ -203,19 +203,22 @@ class _SignupState extends State<Signup> {
                               padding:
                               const EdgeInsets.fromLTRB(30, 10, 30, 10),
                               child: TextField(
+                              
                                 controller: _usernameController,
-                                style: const TextStyle(color: Colors.white),
+                                style: const TextStyle(color: Colors.black),
                                 decoration: InputDecoration(
                                   hintText: "Username",
                                   hintStyle:
-                                  const TextStyle(color: Colors.white),
+                                  const TextStyle(color: Colors.grey),
                                   prefixIcon: const Icon(
                                     Icons.person,
-                                    color: Colors.white,
+                                    color: Colors.grey,
                                   ),
                                   enabledBorder: OutlineInputBorder(
+                                    
                                     borderSide: const BorderSide(
-                                        width: 3, color: Colors.greenAccent),
+                                      
+                                        width: 1, color: Colors.grey),
                                     borderRadius: BorderRadius.circular(40.0),
                                   ),
                                 ),
@@ -229,20 +232,20 @@ class _SignupState extends State<Signup> {
                                   const EdgeInsets.fromLTRB(30, 10, 30, 10),
                               child: TextField(
                                 controller: _passwordController,
-                                style: const TextStyle(color: Colors.white),
+                                style: const TextStyle(color: Colors.black),
                                 obscureText: true,
                                 decoration: InputDecoration(
                                   hintText: "Password",
                                   hintStyle:
-                                      const TextStyle(color: Colors.white),
+                                      const TextStyle(color: Colors.grey),
                                   fillColor: Colors.white,
                                   prefixIcon: const Icon(
                                     Icons.key,
-                                    color: Colors.white,
+                                    color: Colors.grey,
                                   ),
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: const BorderSide(
-                                        width: 3, color: Colors.greenAccent),
+                                        width: 1, color: Colors.grey),
                                     borderRadius: BorderRadius.circular(40.0),
                                   ),
                                 ),

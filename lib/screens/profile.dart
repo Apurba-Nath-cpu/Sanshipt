@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:sanshipt/screens/signup.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -9,6 +11,16 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   @override
+
+   void signout() async {
+    await FirebaseAuth.instance.signOut();
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const Signup(),
+      ),
+    );
+  }
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
@@ -109,7 +121,29 @@ class _ProfileState extends State<Profile> {
                         FloatingActionButton.extended(
                           elevation: 0.5,
                           backgroundColor: Colors.grey,
-                          onPressed: () {},
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (ctx) => AlertDialog(
+                                title: const Text(""),
+                                content: const Text("Do you want to log out?"),
+                                actions: <Widget>[
+                                  TextButton(
+                                    onPressed: () {
+                                      signout();
+                                      Navigator.of(ctx).pop();
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: Container(
+                                      color: Colors.white,
+                                      padding: const EdgeInsets.all(14),
+                                      child: const Text("Yes"),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
                           icon: Icon(Icons.logout),
                           label: Text("Logout"),
                         )

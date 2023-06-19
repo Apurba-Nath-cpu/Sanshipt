@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -35,6 +37,7 @@ class _SummaryyState extends State<Summaryy> {
   Future<void> sendLongText(String input_text) async {
  String url = apiUrl;
     print('res start');
+    try{
     final response = await http.post(Uri.parse(url),
         headers: {'Content-Type': 'application/json'},
         // body: {}
@@ -46,11 +49,22 @@ class _SummaryyState extends State<Summaryy> {
           'input_type': widget.type,
           //'input_type': 'text',
         }));
+      
     summ=('${jsonDecode(response.body)['output_text']}');
     print(summ);
     setState(() {
       isload=false;
     });
+    }
+    catch(e)
+    {
+      
+      summ="Sorry could not summarize the given text.";
+      setState(() {
+      isload=false;
+    });
+      print(summ);
+    }
     
     print('res end');
   }
@@ -66,7 +80,7 @@ class _SummaryyState extends State<Summaryy> {
             Row(
               mainAxisAlignment: save?MainAxisAlignment.spaceAround:MainAxisAlignment.center,
               children: [
-                Text("Here is your summary ",style: TextStyle(fontSize: 25,fontWeight: FontWeight.w900),),
+                Text("Here is your summary ",style: TextStyle(fontSize: 30,fontWeight: FontWeight.w900),),
                 save?GestureDetector(child: Text("Save",style: TextStyle(color: Colors.blue,fontSize: 20),), onTap: () {
                   
                 },):Container(),
@@ -75,21 +89,23 @@ class _SummaryyState extends State<Summaryy> {
                 // }, child: Text("Save",style: TextStyle(color: Colors.blue, fontSize: 20),)) )
               ],
             ),
+            SizedBox(height: 70,),
           Container(
                 margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                height: 800,
+                height: 700,
+                decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),border: Border.all()),
                 width: double.infinity,
-                padding: EdgeInsets.all(10),
+                padding: EdgeInsets.all(30),
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: 
                     [
                       
-                      SizedBox(height: 50,),
+                      
                       Column(
                         children: [
-                          SelectableText(summ,style: TextStyle(fontSize:summ=="Cannot summarize empty text!!!" || summ=="Enter atleast 40 words"?25:20,color: summ=="Cannot summarize empty text!!!" || summ=="Enter atleast 40 words"?Colors.red:Colors.black),),
+                          SelectableText(summ,style: TextStyle(fontSize:summ=="Cannot summarize empty text!!!" || summ=="Enter atleast 40 words" || summ=="Sorry could not summarize the given url. Try entering a valid url."?20:20,color: summ=="Cannot summarize empty text!!!" || summ=="Sorry could not summarize the given text."||summ=="Enter atleast 40 words"?Colors.red:Colors.black),),
                         ],
                       )
                     ],
