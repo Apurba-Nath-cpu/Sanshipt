@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:sanshipt/screens/history.dart';
 import 'package:sanshipt/screens/profile.dart';
 import 'package:sanshipt/screens/signup.dart';
@@ -24,7 +25,13 @@ class _HomeState extends State<Home> {
   bool urlcol = true;
   bool textcol = false;
 
-
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+   
+  }
   Widget build(BuildContext context) {
     return Material(
       child: GestureDetector(
@@ -41,7 +48,7 @@ class _HomeState extends State<Home> {
               child: SingleChildScrollView(
                 child: Column(children: [
                   Container(
-                    padding: EdgeInsets.all(10),
+                    padding: EdgeInsets.all(40),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -136,6 +143,7 @@ class _HomeState extends State<Home> {
                                     });
                                   },
                                   child: Container(
+                                  
                                       child: Text(
                                         "Url",
                                         textAlign: TextAlign.center,
@@ -145,7 +153,7 @@ class _HomeState extends State<Home> {
                                             color: Colors.black87),
                                       ),
                                       height: 30,
-                                      width: 200,
+                                      width: 150,
                                       decoration: BoxDecoration(
                                           color: urlcol
                                               ? Colors.white
@@ -175,7 +183,7 @@ class _HomeState extends State<Home> {
                                           color: Colors.black87),
                                     ),
                                     height: 30,
-                                    width: 200,
+                                    width: 150,
                                     decoration: BoxDecoration(
                                         color: textcol
                                             ? Colors.white
@@ -233,7 +241,7 @@ class _HomeState extends State<Home> {
                                 },
                                 decoration: InputDecoration(
                                   hintText: "Enter article url....",
-                                  contentPadding: EdgeInsets.all(5),
+                                  contentPadding: EdgeInsets.all(20),
                                   border: InputBorder.none,
                                 ),
                               ),

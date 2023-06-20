@@ -30,7 +30,7 @@ class _HistoryState extends State<History> {
             );
           },
           child: Container(
-            margin: EdgeInsets.all(5),
+            margin: EdgeInsets.all(10),
             height: 80,
             child: Card(
               elevation: 3,
@@ -38,7 +38,7 @@ class _HistoryState extends State<History> {
               // color: Colors.transparent,
               child: Row(
                 children: [
-                  Padding(padding: EdgeInsets.all(10), child: Text("Sed ut perspiciatis unde omnis iste natus",style: TextStyle(color: Colors.white),)),
+                  Padding(padding: EdgeInsets.all(20), child: Text("Sed ut perspiciatis unde omnis iste natus",style: TextStyle(color: Colors.white),)),
                   Spacer(),
                   // delete button to delete the summary from history storage
                   IconButton(onPressed: () {

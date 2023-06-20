@@ -77,17 +77,20 @@ class _SummaryyState extends State<Summaryy> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             // SizedBox(height: 5,),
-            Row(
-              mainAxisAlignment: save?MainAxisAlignment.spaceAround:MainAxisAlignment.center,
-              children: [
-                Text("Here is your summary ",style: TextStyle(fontSize: 30,fontWeight: FontWeight.w900),),
-                save?GestureDetector(child: Text("Save",style: TextStyle(color: Colors.blue,fontSize: 20),), onTap: () {
-                  
-                },):Container(),
-                // Opacity(opacity: save?1:0, child: GestureDetector(onTap: () {
-                  
-                // }, child: Text("Save",style: TextStyle(color: Colors.blue, fontSize: 20),)) )
-              ],
+            Padding(
+              padding: const EdgeInsets.all(25),
+              child: Row(
+                mainAxisAlignment: save?MainAxisAlignment.spaceAround:MainAxisAlignment.center,
+                children: [
+                  Text("Here is your summary ",style: TextStyle(fontSize: 30,fontWeight: FontWeight.w900),),
+                  save?GestureDetector(child: Text("Save",style: TextStyle(color: Colors.blue,fontSize: 20),), onTap: () {
+                    
+                  },):Container(),
+                  // Opacity(opacity: save?1:0, child: GestureDetector(onTap: () {
+                    
+                  // }, child: Text("Save",style: TextStyle(color: Colors.blue, fontSize: 20),)) )
+                ],
+              ),
             ),
             SizedBox(height: 70,),
           Container(

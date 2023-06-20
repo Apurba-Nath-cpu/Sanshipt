@@ -32,15 +32,18 @@ class _ProfileState extends State<Profile> {
       },
       child: Scaffold(
         backgroundColor: Color.fromARGB(255, 131, 198, 156),
+       // appBar: AppBar(elevation: 0, automaticallyImplyLeading: false, title: Center(child: Text("Profile",style: TextStyle(fontSize: 30,),),),backgroundColor: Colors.transparent,),
         body: SafeArea(
             child: Padding(
-          padding: EdgeInsets.all(10),
+          padding: EdgeInsets.all(30),
           child: SingleChildScrollView(
             child: Column(
               children: [
-                SizedBox(
-                  height: 50,
-                ),
+                // SizedBox(
+                //   height: 50,
+                // ),
+                Text("Profile",style: TextStyle(fontSize: 30,color: Colors.white),),
+                SizedBox(height: 50,),
                 CircleAvatar(
                   radius: 100,
                   backgroundImage: NetworkImage(

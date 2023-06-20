@@ -13,9 +13,10 @@ class _ShowState extends State<Show> {
     return Scaffold(
       backgroundColor:  Color.fromARGB(255, 131, 198, 156),
          body: SingleChildScrollView(
-           child: SafeArea(child:Padding(padding: EdgeInsets.all(20),child: Column(children: [
+           child: SafeArea(child:Padding(padding: EdgeInsets.all(0),child: Column(children: [
             Container(
-                  margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                  margin: EdgeInsets.fromLTRB(30,30,30,0),
+                  
                   height: 400,
                   decoration: BoxDecoration(border: Border.all(),borderRadius: BorderRadius.circular(10)),
                   width: double.infinity,
@@ -40,7 +41,7 @@ class _ShowState extends State<Show> {
                 ),
                 SizedBox(height: 10,),
                 Container(
-                  margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                  margin: EdgeInsets.fromLTRB(30,30,30,0),
                   height: 400,
                   decoration: BoxDecoration(border: Border.all(),borderRadius: BorderRadius.circular(10)),
                   width: double.infinity,
