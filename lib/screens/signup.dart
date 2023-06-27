@@ -8,6 +8,9 @@ import 'package:sanshipt/screens/home.dart';
 import 'package:sanshipt/screens/signin.dart';
 import 'package:image_picker/image_picker.dart';
 import '../resources/auth_methods.dart';
+import '../responsive/mobile_screen_layout.dart';
+import '../responsive/responsive_layout.dart';
+import '../responsive/web_screen_layout.dart';
 import '../utils/utils.dart';
 
 class Signup extends StatefulWidget {
@@ -53,7 +56,7 @@ class _SignupState extends State<Signup> {
     print('${_emailController.text}');
     String res = 'failure';
     res = await AuthMethods().signUpUser(
-      email: _emailController.text,
+      email: _emailController.text.trim(),
       password: _passwordController.text,
       username: _usernameController.text,
       file: _image!,
@@ -65,7 +68,10 @@ class _SignupState extends State<Signup> {
     } else {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => Home(),
+          builder: (context) => const ResponsiveLayout(
+            webScreenLayout: WebScreenLayout(),
+            mobileScreenLayout: MobileScreenLayout(),
+          ),
         ),
       );
     }
@@ -125,46 +131,27 @@ class _SignupState extends State<Signup> {
                         children: [
                           //child: Image.network("https://cdn.analyticsvidhya.com/wp-content/uploads/2020/12/166651_5_t4EJl1Iy9B1w5EtX1Zog.jpeg")),
                           Material(
-                            borderRadius: BorderRadius.circular(
-                                MediaQuery.of(context).size.height +
-                                    MediaQuery.of(context).size.width),
+                            borderRadius: BorderRadius.circular(40),
                             child: InkWell(
                               onTap: () => selectImage(),
                               child: Container(
                                 child: _image != null
                                     ? Material(
-                                        borderRadius: BorderRadius.circular(
-                                            MediaQuery.of(context).size.height +
-                                                MediaQuery.of(context)
-                                                    .size
-                                                    .width),
+                                        borderRadius: BorderRadius.circular(50),
                                         child: CircleAvatar(
-                                          radius: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.041,
+                                          radius: 40,
                                           backgroundColor: Colors.greenAccent,
                                           child: CircleAvatar(
-                                            radius: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                0.038,
+                                            radius: 38,
                                             backgroundImage:
                                                 MemoryImage(_image!),
                                           ),
                                         ),
                                       )
                                     : Material(
-                                        borderRadius: BorderRadius.circular(
-                                            MediaQuery.of(context).size.height +
-                                                MediaQuery.of(context)
-                                                    .size
-                                                    .width),
+                                        borderRadius: BorderRadius.circular(50),
                                         child: CircleAvatar(
-                                          radius: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.041,
+                                          radius: 40,
                                           backgroundImage: const AssetImage(
                                               'assets/null_dp.png'),
                                         ),

@@ -3,10 +3,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import 'package:sanshipt/resources/auth_methods.dart';
 import 'package:sanshipt/screens/history.dart';
 import 'package:sanshipt/screens/profile.dart';
 import 'package:sanshipt/screens/signup.dart';
 import 'package:sanshipt/screens/summaryy.dart';
+import 'package:sanshipt/models/user.dart' as model;
+
+import '../providers/user_provider.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -30,9 +35,15 @@ class _HomeState extends State<Home> {
     // TODO: implement initState
     super.initState();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-   
   }
+
+  void logout() async {
+    print("..logout..");
+    await AuthMethods().signOut();
+  }
+
   Widget build(BuildContext context) {
+    final model.User? user = Provider.of<UserProvider>(context).getUser;
     return Material(
       child: GestureDetector(
         onTap: () {
@@ -43,48 +54,56 @@ class _HomeState extends State<Home> {
           }
         },
         child: Scaffold(
-            backgroundColor: Color.fromARGB(255, 131, 198, 156),
+            backgroundColor: const Color.fromARGB(255, 131, 198, 156),
             body: SafeArea(
               child: SingleChildScrollView(
                 child: Column(children: [
                   Container(
-                    padding: EdgeInsets.all(40),
+                    padding: const EdgeInsets.all(40),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const Profile()),
-                            );
-                          },
+                        TextButton(
+                          onPressed: () {
+                              print("Profile btn");
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const Profile(),
+                                ),
+                              );
+                            },
                           child: CircleAvatar(
                             backgroundImage: NetworkImage(
-                                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXTL070i2nDW-Juwu6h1MYRZDEkqvnFLlThg&usqp=CAU"),
+                            user?.photoUrl ??
+                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXTL070i2nDW-Juwu6h1MYRZDEkqvnFLlThg&usqp=CAU",
+                          ),
+                          child: Container(),
                           ),
                         ),
-                        Text(
+                        const Text(
                           'Sanshipt',
                           style: TextStyle(
                               fontWeight: FontWeight.w900,
                               fontSize: 30,
-                              color: Colors.purple),
+                              color: Colors.purple
+                          ),
                         ),
                         IconButton(
                             onPressed: () {
                               Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const History()),
-                            );
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const History(),
+                                ),
+                              );
                             },
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.history,
                               size: 30,
-                            ))
-            
+                            ),
+                        ),
+
                         // TextButton(
                         //   onPressed: () {
                         //     showDialog(
@@ -119,11 +138,11 @@ class _HomeState extends State<Home> {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 100,
                   ),
                   // Note: Same code is applied for the TextFormField as well
-            
+
                   Container(
                     child: Column(
                       children: [
@@ -143,15 +162,6 @@ class _HomeState extends State<Home> {
                                     });
                                   },
                                   child: Container(
-                                  
-                                      child: Text(
-                                        "Url",
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w900,
-                                            color: Colors.black87),
-                                      ),
                                       height: 30,
                                       width: 150,
                                       decoration: BoxDecoration(
@@ -159,7 +169,17 @@ class _HomeState extends State<Home> {
                                               ? Colors.white
                                               : Colors.transparent,
                                           borderRadius:
-                                              BorderRadius.circular(10)))),
+                                              BorderRadius.circular(10)),
+                                      child: const Text(
+                                        "Url",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w900,
+                                            color: Colors.black87),
+                                      ),
+                                  ),
+                              ),
                               //  Spacer(),
                               GestureDetector(
                                   onTap: () {
@@ -174,14 +194,6 @@ class _HomeState extends State<Home> {
                                     });
                                   },
                                   child: Container(
-                                    child: Text(
-                                      "Raw text",
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w900,
-                                          color: Colors.black87),
-                                    ),
                                     height: 30,
                                     width: 150,
                                     decoration: BoxDecoration(
@@ -190,18 +202,29 @@ class _HomeState extends State<Home> {
                                             : Colors.transparent,
                                         borderRadius:
                                             BorderRadius.circular(10)),
-                                  )),
-                            ]),
+                                    child: const Text(
+                                      "Raw text",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w900,
+                                          color: Colors.black87
+                                      ),
+                                    ),
+                                  ),
+                              ),
+                            ],
+                        ),
                         Visibility(
                           visible: text_type,
                           child: Container(
-                            margin: EdgeInsets.fromLTRB(10, 20, 10, 20),
+                            margin: const EdgeInsets.fromLTRB(10, 20, 10, 20),
                             height: 500,
                             // decoration: BoxDecoration(border: Border.all()),
                             width: double.infinity,
-                            padding: EdgeInsets.all(10),
+                            padding: const EdgeInsets.all(10),
                             child: TextField(
-                              style: TextStyle(fontSize: 20),
+                              style: const TextStyle(fontSize: 20),
                               cursorColor: Colors.black,
                               // cursorHeight: 20,
                               keyboardType: TextInputType.multiline,
@@ -211,13 +234,15 @@ class _HomeState extends State<Home> {
                                   input = val;
                                 });
                               },
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 hintText: "Enter your text here......",
                                 hintStyle: TextStyle(fontSize: 20),
                                 contentPadding: EdgeInsets.all(20),
                                 border: InputBorder.none,
                                 labelStyle:
-                                    const TextStyle(color: Colors.white),
+                                    TextStyle(
+                                        color: Colors.white,
+                                    ),
                               ),
                             ),
                           ),
@@ -226,10 +251,10 @@ class _HomeState extends State<Home> {
                         Visibility(
                             visible: url_type,
                             child: Container(
-                              margin: EdgeInsets.fromLTRB(5, 120, 5, 50),
+                              margin: const EdgeInsets.fromLTRB(5, 120, 5, 50),
                               // decoration: BoxDecoration(border: Border.all()),
                               child: TextField(
-                                style: TextStyle(
+                                style: const TextStyle(
                                     color: Colors.black, fontSize: 20),
                                 cursorColor: Colors.black,
                                 keyboardType: TextInputType.multiline,
@@ -239,46 +264,56 @@ class _HomeState extends State<Home> {
                                     input = val;
                                   });
                                 },
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   hintText: "Enter article url....",
                                   contentPadding: EdgeInsets.all(20),
                                   border: InputBorder.none,
                                 ),
                               ),
-                            )),
-                        SizedBox(
+                            ),
+                        ),
+                        const SizedBox(
                           height: 10,
                         ),
                         Visibility(
                           visible: button,
                           child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                padding: EdgeInsets.symmetric(
+                                padding: const EdgeInsets.symmetric(
                                     horizontal: 20.0, vertical: 20.0),
-                                backgroundColor:
-                                    Colors.teal,
-                                shape: StadiumBorder(),
+                                backgroundColor: Colors.teal,
+                                shape: const StadiumBorder(),
                               ),
                               onPressed: () {
                                 print(input);
-            
+
                                 print('hello');
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => Summaryy(
-                                          text: input, type: input_type)),
+                                          text: input, type: input_type
+                                      ),
+                                  ),
                                 );
                                 //input="";
                               },
-                              child: Text("Summarize")),
+                              child: const Text("Summarize"),
+                          ),
                         )
                       ],
                     ),
                   )
                 ]),
               ),
-            )),
+            ),
+          floatingActionButton: FloatingActionButton(onPressed: () {
+            print("..profile..");
+            print(user);
+          },
+            child: Icon(Icons.logout),
+          ),
+        ),
       ),
     );
   }

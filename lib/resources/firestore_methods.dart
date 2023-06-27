@@ -14,14 +14,9 @@ class FirestoreMethods {
 
   Future<String> uploadPost({
     required String title,
-    required String work,
+    required String summary,
     required String uid,
     required String username,
-    required String lang,
-    required String type,
-    required String genre,
-    required String audience,
-    required String profImage,
   }) async {
     String res = "Some error occured";
     try {
@@ -33,17 +28,11 @@ class FirestoreMethods {
 
       Post post = await Post(
         title: title,
-        work: work,
+        summary: summary,
         uid: uid,
         username: username,
-        lang: lang,
-        type: type,
-        genre: genre,
-        audience: audience,
         postId: postId,
         datePublished: DateTime.now(),
-        profImage: profImage,
-        likes: [],
       );
 
       _firestore.collection('posts').doc(postId).set(post.toJson());
@@ -120,11 +109,13 @@ class FirestoreMethods {
   }
 
   // Delete post
-  Future<void> deletePost(String postId) async {
+  Future<String> deletePost({required String postId}) async {
     try {
       await _firestore.collection('posts').doc(postId).delete();
+      return "Deleted";
     } catch (err) {
       print(err.toString());
+      return "Some error occurred";
     }
   }
 

@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sanshipt/models/user.dart' as model;
 import 'package:sanshipt/resources/storage_methods.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:sanshipt/utils/utils.dart';
 // import 'package:ebook_reader/resources/storage_methods.dart';
 
 class AuthMethods {
@@ -18,6 +19,25 @@ class AuthMethods {
 
     return model.User.fromSnap(snap);
   }
+
+  Future<String> updateUserName(String newDisplayName) async {
+    User? currentUser = FirebaseAuth.instance.currentUser;
+
+    if (currentUser != null) {
+      // Update the display name in Firebase Auth
+      await currentUser.updateDisplayName(newDisplayName);
+
+      // Also update the display name in Firestore if you store user data there
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(currentUser?.uid)
+          .update({'username': newDisplayName});
+      return "Edited";
+    } else {
+      return "Please log in first";
+    }
+  }
+
 
   // sign up user
   Future<String> signUpUser({

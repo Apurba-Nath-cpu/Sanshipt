@@ -5,6 +5,9 @@ import 'package:sanshipt/screens/home.dart';
 import 'package:sanshipt/screens/signup.dart';
 
 import '../resources/auth_methods.dart';
+import '../responsive/mobile_screen_layout.dart';
+import '../responsive/responsive_layout.dart';
+import '../responsive/web_screen_layout.dart';
 
 void main() {
   runApp(const MaterialApp(home: Signin()));
@@ -31,12 +34,13 @@ class _SigninState extends State<Signin> {
 
   void signinUser() async {
     print(_emailController.text);
+    print("..email..");
     setState(() {
       _isLoading = true;
     });
     print('in-login');
     String res = await AuthMethods().loginUser(
-      email: _emailController.text,
+      email: _emailController.text.trim(),
       password: _passwordController.text,
     );
     if (res != 'success') {
@@ -44,7 +48,10 @@ class _SigninState extends State<Signin> {
     } else {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => Home(),
+          builder: (context) => const ResponsiveLayout(
+            webScreenLayout: WebScreenLayout(),
+            mobileScreenLayout: MobileScreenLayout(),
+          ),
         ),
       );
     }
