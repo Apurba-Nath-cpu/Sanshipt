@@ -5,6 +5,9 @@ import 'package:sanshipt/screens/home.dart';
 import 'package:sanshipt/screens/signup.dart';
 
 import '../resources/auth_methods.dart';
+import '../responsive/mobile_screen_layout.dart';
+import '../responsive/responsive_layout.dart';
+import '../responsive/web_screen_layout.dart';
 
 void main() {
   runApp(const MaterialApp(home: Signin()));
@@ -31,12 +34,13 @@ class _SigninState extends State<Signin> {
 
   void signinUser() async {
     print(_emailController.text);
+    print("..email..");
     setState(() {
       _isLoading = true;
     });
     print('in-login');
     String res = await AuthMethods().loginUser(
-      email: _emailController.text,
+      email: _emailController.text.trim(),
       password: _passwordController.text,
     );
     if (res != 'success') {
@@ -44,7 +48,10 @@ class _SigninState extends State<Signin> {
     } else {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => Home(),
+          builder: (context) => const ResponsiveLayout(
+            webScreenLayout: WebScreenLayout(),
+            mobileScreenLayout: MobileScreenLayout(),
+          ),
         ),
       );
     }
@@ -56,7 +63,7 @@ class _SigninState extends State<Signin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.blue[900],
+        backgroundColor: Color.fromARGB(255, 131, 198, 156),
         body: GestureDetector(
           onTap: () {
             FocusManager.instance.primaryFocus?.unfocus();
@@ -110,18 +117,18 @@ class _SigninState extends State<Signin> {
                               padding: const EdgeInsets.all(30.0),
                               child: TextField(
                                 controller: _emailController,
-                                style: const TextStyle(color: Colors.white),
+                                style: const TextStyle(color: Colors.black),
                                 decoration: InputDecoration(
                                   hintText: "E-mail",
                                   hintStyle:
-                                      const TextStyle(color: Colors.white),
+                                      const TextStyle(color: Colors.grey),
                                   prefixIcon: const Icon(
                                     Icons.email,
-                                    color: Colors.white,
+                                    color: Colors.grey,
                                   ),
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: const BorderSide(
-                                        width: 3, color: Colors.greenAccent),
+                                        width: 1, color: Colors.grey),
                                     borderRadius: BorderRadius.circular(40.0),
                                   ),
                                 ),
@@ -134,20 +141,20 @@ class _SigninState extends State<Signin> {
                               padding: const EdgeInsets.all(30.0),
                               child: TextField(
                                 controller: _passwordController,
-                                style: const TextStyle(color: Colors.white),
+                                style: const TextStyle(color: Colors.black),
                                 obscureText: true,
                                 decoration: InputDecoration(
                                   hintText: "Password",
                                   hintStyle:
-                                      const TextStyle(color: Colors.white),
+                                      const TextStyle(color: Colors.grey),
                                   fillColor: Colors.white,
                                   prefixIcon: const Icon(
                                     Icons.key,
-                                    color: Colors.white,
+                                    color: Colors.grey,
                                   ),
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: const BorderSide(
-                                        width: 3, color: Colors.greenAccent),
+                                        width: 1, color: Colors.grey),
                                     borderRadius: BorderRadius.circular(40.0),
                                   ),
                                 ),
