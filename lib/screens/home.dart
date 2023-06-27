@@ -44,8 +44,9 @@ class _HomeState extends State<Home> {
 
   Widget build(BuildContext context) {
     final model.User? user = Provider.of<UserProvider>(context).getUser;
-    return Material(
-      child: GestureDetector(
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: GestureDetector(
         onTap: () {
           FocusScopeNode currentFocus = FocusScope.of(context);
 
@@ -307,12 +308,7 @@ class _HomeState extends State<Home> {
                 ]),
               ),
             ),
-          floatingActionButton: FloatingActionButton(onPressed: () {
-            print("..profile..");
-            print(user);
-          },
-            child: Icon(Icons.logout),
-          ),
+         
         ),
       ),
     );

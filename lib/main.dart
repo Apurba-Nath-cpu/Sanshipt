@@ -71,6 +71,7 @@ class _MyAppState extends State<MyApp> {
       child: MediaQuery(
         data: const MediaQueryData(),
         child: MaterialApp(
+          debugShowCheckedModeBanner: false,
           color: const Color.fromARGB(255, 60, 60, 60),
           theme: ThemeData.dark(),
           home: const Signup(),
