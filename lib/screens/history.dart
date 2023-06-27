@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sanshipt/screens/show.dart';
-
+import 'package:sanshipt/models/user.dart' as model;
+import '../providers/user_provider.dart';
 import '../resources/firestore_methods.dart';
 import '../utils/utils.dart';
 
@@ -34,6 +36,7 @@ class _HistoryState extends State<History> {
 
   @override
   Widget build(BuildContext context) {
+    final model.User? user = Provider.of<UserProvider>(context).getUser;
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 131, 198, 156),
       appBar: AppBar(
@@ -43,7 +46,7 @@ class _HistoryState extends State<History> {
         automaticallyImplyLeading: false,
       ),
       body: Container(
-        height: 100,
+        height: 900,
         child: StreamBuilder(
           builder: (context,
               AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
@@ -52,7 +55,7 @@ class _HistoryState extends State<History> {
                 scrollDirection: Axis.vertical,
                 itemCount: snapshot.data?.docs.length,
                 shrinkWrap: false,
-                itemBuilder: (context, index) => Container(
+                itemBuilder: (context, index) => snapshot.data!.docs[index].data()['uid'] == user?.uid ? Container(
                   margin: const EdgeInsets.all(10),
                   height: 80,
                   child: Card(
@@ -64,6 +67,8 @@ class _HistoryState extends State<History> {
                       children: [
                         GestureDetector(
                           onTap: () {
+                            print(snapshot.data?.docs.length);
+                            print("snapshot");
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -98,7 +103,7 @@ class _HistoryState extends State<History> {
                             margin: const EdgeInsets.only(right: 12),
                             child: IconButton(
                               onPressed: () {
-                                deleteSummary(snapshot.data!.docs[index].data()['title']);
+                                deleteSummary(snapshot.data!.docs[index].data()['postId']);
                               },
                               icon: const Icon(
                                 Icons.delete,
@@ -111,7 +116,8 @@ class _HistoryState extends State<History> {
                       ],
                     ),
                   ),
-                ),
+                ) :
+                Container(),
               );
             }
             return const CircularProgressIndicator();

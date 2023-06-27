@@ -81,7 +81,7 @@ class _ShowState extends State<Show> {
                               ),
                             ),
                           ],
-                        )
+                        ),
                       ],
                     ),
                   ),

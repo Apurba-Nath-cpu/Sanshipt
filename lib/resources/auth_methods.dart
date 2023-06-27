@@ -116,6 +116,7 @@ class AuthMethods {
       print('equal');
     }
     print('${email}');
+    print('${password}');
 
     try {
       if (email.isNotEmpty && password.isNotEmpty) {

@@ -132,12 +132,12 @@ class _SummaryyState extends State<Summaryy> {
                                 ? MainAxisAlignment.spaceAround
                                 : MainAxisAlignment.center,
                             children: [
-                              Text(
+                              const Text(
                                 "Here is your summary ",
                                 style: TextStyle(
                                     fontSize: 30, fontWeight: FontWeight.w900),
                               ),
-                              SizedBox(height: 30,),
+                              const SizedBox(height: 30,),
                               // Note: Same code is applied for the TextFormField as well
                               if(save)
                               TextField(
@@ -147,8 +147,7 @@ class _SummaryyState extends State<Summaryy> {
                                 decoration: InputDecoration(
                                   hintText: "Enter summary title",
                                   enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      
+                                    borderSide: const BorderSide(
                                         width: 1,
                                         color: Colors.black), //<-- SEE HERE
                                     borderRadius: BorderRadius.circular(50.0),
@@ -209,23 +208,26 @@ class _SummaryyState extends State<Summaryy> {
                                     opacity: save ? 1 : 0,
                                     child: GestureDetector(
                                         // onTap: () {},
-                                        child: Text(
+                                        child: const Text(
                                           "Save",
                                           style: TextStyle(
                                               color: Colors.blue, fontSize: 20),
-                                        ))),
+                                        ),
+                                    ),
+                                ),
                                 onTap: () {
                                   showDialog(
                                     context: context,
                                     builder: (ctx) => AlertDialog(
                                       // title: const Text("jg"),
-                                      content: title==""?Text("Enter a title"):Text("Summary saved!"),
+                                      content: title=="" ? const Text("Enter a title") : const Text("Summary saved!"),
                                       actions: <Widget>[
                                         TextButton(
                                           onPressed: () {
-                                            if(title!="")
-                                            uploadSummary(title, summ,
+                                            if(title!="") {
+                                              uploadSummary(title, summ,
                                                 user!.uid, user.username);
+                                            }
                                             // signout();
                                             Navigator.of(ctx).pop();
                                             // Navigator.of(context).pop();
