@@ -72,7 +72,7 @@ class _ProfileState extends State<Profile> {
                     );
                   },
                   child: CircleAvatar(
-                    radius: 100,
+                    radius: 80,
                     backgroundImage: NetworkImage(
                       user?.photoUrl ??
                       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXTL070i2nDW-Juwu6h1MYRZDEkqvnFLlThg&usqp=CAU",

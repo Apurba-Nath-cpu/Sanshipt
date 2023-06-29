@@ -89,7 +89,7 @@ class _ShowState extends State<Show> {
                 const SizedBox(height: 10,),
                 Container(
                   margin: const EdgeInsets.fromLTRB(30,30,30,0),
-                  height: 400,
+                  height: 500,
                   decoration: BoxDecoration(border: Border.all(),borderRadius: BorderRadius.circular(10)),
                   width: double.infinity,
                   padding: const EdgeInsets.all(10),
@@ -105,7 +105,7 @@ class _ShowState extends State<Show> {
                             const SizedBox(height: 20,),
                             SingleChildScrollView(
                               child: SelectionArea(
-                                  child: Text(widget.content),
+                                  child: Text(widget.content,),
                               ),
                             ),
                           ],

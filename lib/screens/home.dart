@@ -55,6 +55,7 @@ class _HomeState extends State<Home> {
           }
         },
         child: Scaffold(
+          resizeToAvoidBottomInset : false,
             backgroundColor: const Color.fromARGB(255, 131, 198, 156),
             body: SafeArea(
               child: SingleChildScrollView(
@@ -104,46 +105,12 @@ class _HomeState extends State<Home> {
                               size: 30,
                             ),
                         ),
-
-                        // TextButton(
-                        //   onPressed: () {
-                        //     showDialog(
-                        //       context: context,
-                        //       builder: (ctx) => AlertDialog(
-                        //         title: const Text(""),
-                        //         content: const Text("Do you want to log out?"),
-                        //         actions: <Widget>[
-                        //           TextButton(
-                        //             onPressed: () {
-                        //               signout();
-                        //               Navigator.of(ctx).pop();
-                        //             },
-                        //             child: Container(
-                        //               color: Colors.white,
-                        //               padding: const EdgeInsets.all(14),
-                        //               child: const Text("Yes"),
-                        //             ),
-                        //           ),
-                        //         ],
-                        //       ),
-                        //     );
-                        //   },
-                        //   child: const Text(
-                        //     'log out',
-                        //     style: TextStyle(
-                        //         fontSize: 20,
-                        //         color: Colors.black,
-                        //         fontWeight: FontWeight.w900),
-                        //   ),
-                        // ),
                       ],
                     ),
                   ),
                   const SizedBox(
                     height: 100,
                   ),
-                  // Note: Same code is applied for the TextFormField as well
-
                   Container(
                     child: Column(
                       children: [
@@ -259,7 +226,7 @@ class _HomeState extends State<Home> {
                                     color: Colors.black, fontSize: 20),
                                 cursorColor: Colors.black,
                                 keyboardType: TextInputType.multiline,
-                                maxLines: 8,
+                                maxLines: 5,
                                 onChanged: (val) {
                                   setState(() {
                                     input = val;
@@ -287,7 +254,7 @@ class _HomeState extends State<Home> {
                               ),
                               onPressed: () {
                                 print(input);
-
+                            
                                 print('hello');
                                 Navigator.push(
                                   context,

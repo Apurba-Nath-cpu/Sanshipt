@@ -41,7 +41,7 @@ class _HistoryState extends State<History> {
       backgroundColor: const Color.fromARGB(255, 131, 198, 156),
       appBar: AppBar(
         elevation: 0,
-        title: const Center(child: Text("Saved summaries",style: TextStyle(color: Colors.black,fontWeight: FontWeight.w900),)),
+        title: Container(margin: EdgeInsets.fromLTRB(100,100,100,100), child: Text("Saved summaries",style: TextStyle(color: Colors.black,fontWeight: FontWeight.w900),)),
          backgroundColor: const Color.fromARGB(255, 131, 198, 156),
         automaticallyImplyLeading: false,
       ),
@@ -117,10 +117,10 @@ class _HistoryState extends State<History> {
                     ),
                   ),
                 ) :
-                Container(),
+               Center(child: Text("No saved summary to display"))
               );
             }
-            return const CircularProgressIndicator();
+            return Center(child: CircularProgressIndicator(),);
           },
           stream: FirebaseFirestore.instance
               .collection('posts')
