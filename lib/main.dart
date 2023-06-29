@@ -74,7 +74,7 @@ class _MyAppState extends State<MyApp> {
           debugShowCheckedModeBanner: false,
           color: const Color.fromARGB(255, 60, 60, 60),
           theme: ThemeData.dark(),
-          home: const Signup(),
+          home: FirebaseAuth.instance.currentUser?.uid == null ? Signup() : Home(),
         ),
       ),
     );
