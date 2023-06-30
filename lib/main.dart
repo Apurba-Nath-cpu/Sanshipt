@@ -50,7 +50,7 @@ class MyApp extends StatefulWidget {
 //             return Home();
 //           }
 //           else{
-//             return Signup();
+//             return Signup()
 //           }
 //         },
 //       ),
@@ -74,7 +74,8 @@ class _MyAppState extends State<MyApp> {
           debugShowCheckedModeBanner: false,
           color: const Color.fromARGB(255, 60, 60, 60),
           theme: ThemeData.dark(),
-          home: FirebaseAuth.instance.currentUser?.uid == null ? Signup() : Home(),
+          // home: FirebaseAuth.instance.currentUser?.uid == null ? Signup() : Home(),
+          home:Signup()
         ),
       ),
     );
