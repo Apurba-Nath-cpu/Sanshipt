@@ -53,7 +53,7 @@ class MyApp extends StatefulWidget {
 //             return Home();
 //           }
 //           else{
-//             return Signup();
+//             return Signup()
 //           }
 //         },
 //       ),
@@ -76,6 +76,7 @@ class _MyAppState extends State<MyApp> {
           debugShowCheckedModeBanner: false,
           color: const Color.fromARGB(255, 60, 60, 60),
           theme: ThemeData.dark(),
+// <<<<<<< apurba
           home: StreamBuilder(
               stream: FirebaseAuth.instance.authStateChanges(),
               builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -97,6 +98,10 @@ class _MyAppState extends State<MyApp> {
                   }
                 }
               }),
+// =======
+          // home: FirebaseAuth.instance.currentUser?.uid == null ? Signup() : Home(),
+          home:Signup()
+// >>>>>>> master
         ),
       ),
     );
