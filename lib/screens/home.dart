@@ -1,6 +1,3 @@
-import 'dart:convert';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -68,6 +65,7 @@ class _HomeState extends State<Home> {
                         TextButton(
                           onPressed: () {
                               print("Profile btn");
+                              print(user!.email ?? "email");
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -78,17 +76,23 @@ class _HomeState extends State<Home> {
                           child: CircleAvatar(
                             backgroundImage: NetworkImage(
                             user?.photoUrl ??
-                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXTL070i2nDW-Juwu6h1MYRZDEkqvnFLlThg&usqp=CAU",
+                            "https://th.bing.com/th/id/OIP.mqCSNfJntVSLuyZoWOvrlwHaE8?w=273&h=182&c=7&r=0&o=5&dpr=1.3&pid=1.7",
                           ),
                           child: Container(),
                           ),
                         ),
-                        const Text(
-                          'Sanshipt',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w900,
-                              fontSize: 30,
-                              color: Colors.purple
+                        GestureDetector(
+                          onTap: () {
+                            // print(user!.email);
+                            print("email");
+                          },
+                          child: const Text(
+                            'Sanshipt',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w900,
+                                fontSize: 30,
+                                color: Colors.purple
+                            ),
                           ),
                         ),
                         IconButton(
@@ -176,7 +180,7 @@ class _HomeState extends State<Home> {
                                       style: TextStyle(
                                           fontSize: 20,
                                           fontWeight: FontWeight.w900,
-                                          color: Colors.black87
+                                          color: Colors.black87,
                                       ),
                                     ),
                                   ),
@@ -248,7 +252,8 @@ class _HomeState extends State<Home> {
                           child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 padding: const EdgeInsets.symmetric(
-                                    horizontal: 20.0, vertical: 20.0),
+                                    horizontal: 20.0, vertical: 20.0,
+                                ),
                                 backgroundColor: Colors.teal,
                                 shape: const StadiumBorder(),
                               ),
@@ -256,14 +261,15 @@ class _HomeState extends State<Home> {
                                 print(input);
                             
                                 print('hello');
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Summaryy(
-                                          text: input, type: input_type
-                                      ),
-                                  ),
-                                );
+                                print(user?.email ?? "email");
+                                // Navigator.push(
+                                //   context,
+                                //   MaterialPageRoute(
+                                //       builder: (context) => Summaryy(
+                                //           text: input, type: input_type
+                                //       ),
+                                //   ),
+                                // );
                                 //input="";
                               },
                               child: const Text("Summarize"),

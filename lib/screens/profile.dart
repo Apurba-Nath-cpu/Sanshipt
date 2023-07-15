@@ -63,7 +63,7 @@ class _ProfileState extends State<Profile> {
                               child: Image(
                                 image: NetworkImage(
                                   user?.photoUrl ??
-                                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXTL070i2nDW-Juwu6h1MYRZDEkqvnFLlThg&usqp=CAU",
+                                      "https://th.bing.com/th/id/OIP.mqCSNfJntVSLuyZoWOvrlwHaE8?w=273&h=182&c=7&r=0&o=5&dpr=1.3&pid=1.7",
                                 ),
                               ),
                             )
@@ -75,7 +75,7 @@ class _ProfileState extends State<Profile> {
                     radius: 80,
                     backgroundImage: NetworkImage(
                       user?.photoUrl ??
-                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXTL070i2nDW-Juwu6h1MYRZDEkqvnFLlThg&usqp=CAU",
+                      "https://th.bing.com/th/id/OIP.mqCSNfJntVSLuyZoWOvrlwHaE8?w=273&h=182&c=7&r=0&o=5&dpr=1.3&pid=1.7",
                     ),
                   ),
                 ),
@@ -84,7 +84,7 @@ class _ProfileState extends State<Profile> {
                 ),
                 Text(
                   user?.email ?? "",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
+                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
                 ),
                 const SizedBox(
                   height: 40,

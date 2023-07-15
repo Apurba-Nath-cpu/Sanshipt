@@ -4,6 +4,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:provider/provider.dart';
 import 'package:sanshipt/providers/user_provider.dart';
+import 'package:sanshipt/responsive/mobile_screen_layout.dart';
+import 'package:sanshipt/responsive/responsive_layout.dart';
+import 'package:sanshipt/responsive/web_screen_layout.dart';
 import 'package:sanshipt/screens/home.dart';
 import 'package:sanshipt/screens/signup.dart';
 
@@ -23,10 +26,10 @@ void main() async {
     await Firebase.initializeApp();
   }
   runApp(
-      const MaterialApp(
-        home: MyApp(),
-        debugShowCheckedModeBanner: false,
-      ),
+    const MaterialApp(
+      home: MyApp(),
+      debugShowCheckedModeBanner: false,
+    ),
   );
 }
 
@@ -59,7 +62,6 @@ class MyApp extends StatefulWidget {
 // }
 
 class _MyAppState extends State<MyApp> {
-
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -74,8 +76,32 @@ class _MyAppState extends State<MyApp> {
           debugShowCheckedModeBanner: false,
           color: const Color.fromARGB(255, 60, 60, 60),
           theme: ThemeData.dark(),
+// <<<<<<< apurba
+          home: StreamBuilder(
+              stream: FirebaseAuth.instance.authStateChanges(),
+              builder: (BuildContext context, AsyncSnapshot snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(
+                      child:
+                          CircularProgressIndicator()); // Or your own loading widget
+                } else if (snapshot.hasError) {
+                  return Text('Error: ${snapshot.error}');
+                } else {
+                  // Checking if user is null
+                  if (snapshot.data == null) {
+                    return const Signup();
+                  } else {
+                    return const ResponsiveLayout(
+                      webScreenLayout: WebScreenLayout(),
+                      mobileScreenLayout: MobileScreenLayout(),
+                    );
+                  }
+                }
+              }),
+// =======
           // home: FirebaseAuth.instance.currentUser?.uid == null ? Signup() : Home(),
           home:Signup()
+// >>>>>>> master
         ),
       ),
     );
