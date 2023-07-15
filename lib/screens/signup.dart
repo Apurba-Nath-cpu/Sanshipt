@@ -152,9 +152,9 @@ class _SignupState extends State<Signup> {
                                         )
                                       : Material(
                                           borderRadius: BorderRadius.circular(50),
-                                          child: CircleAvatar(
+                                          child: const CircleAvatar(
                                             radius: 40,
-                                            backgroundImage: const AssetImage(
+                                            backgroundImage: AssetImage(
                                                 'assets/null_dp.png'),
                                           ),
                                         ),
