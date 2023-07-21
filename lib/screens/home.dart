@@ -258,6 +258,11 @@ class _HomeState extends State<Home> {
                                 shape: const StadiumBorder(),
                               ),
                               onPressed: () {
+                                Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>  Summaryy(text: input,type: input_type,)),
+                            );
                                 print(input);
                             
                                 print('hello');
