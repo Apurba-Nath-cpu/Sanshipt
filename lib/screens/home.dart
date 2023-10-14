@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:sanshipt/resources/auth_methods.dart';
 import 'package:sanshipt/screens/history.dart';
+import 'package:sanshipt/screens/input.dart';
 import 'package:sanshipt/screens/profile.dart';
 import 'package:sanshipt/screens/signup.dart';
 import 'package:sanshipt/screens/summaryy.dart';
 import 'package:sanshipt/models/user.dart' as model;
-
+import 'package:firebase_auth/firebase_auth.dart';
 import '../providers/user_provider.dart';
 
 class Home extends StatefulWidget {
@@ -40,7 +42,7 @@ class _HomeState extends State<Home> {
   }
 
   Widget build(BuildContext context) {
-    final model.User? user = Provider.of<UserProvider>(context).getUser;
+    // final model.User? user = Provider.of<UserProvider>(context).getUser;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: GestureDetector(
@@ -52,242 +54,182 @@ class _HomeState extends State<Home> {
           }
         },
         child: Scaffold(
-          resizeToAvoidBottomInset : false,
-            backgroundColor: const Color.fromARGB(255, 131, 198, 156),
-            body: SafeArea(
-              child: SingleChildScrollView(
-                child: Column(children: [
-                  Container(
-                    padding: const EdgeInsets.all(40),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        TextButton(
-                          onPressed: () {
-                              print("Profile btn");
-                              print(user!.email ?? "email");
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const Profile(),
-                                ),
-                              );
-                            },
-                          child: CircleAvatar(
-                            backgroundImage: NetworkImage(
-                            user?.photoUrl ??
-                            "https://th.bing.com/th/id/OIP.mqCSNfJntVSLuyZoWOvrlwHaE8?w=273&h=182&c=7&r=0&o=5&dpr=1.3&pid=1.7",
-                          ),
-                          child: Container(),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            // print(user!.email);
-                            print("email");
-                          },
-                          child: const Text(
+            resizeToAvoidBottomInset: false,
+            body: Stack(
+              children: [
+                Column(
+                  children: [
+                    Container(
+                      color: Color.fromARGB(255, 79, 158, 160),
+                      height: 300,
+                      width: double.infinity,
+                    ),
+                  ],
+                ),
+                Positioned(
+                  top: 50,
+                  left: 0,
+                  right: 0,
+                  child: Column(
+                    children: [
+                      Container(
+                        child: Center(
+                          child: Text(
                             'Sanshipt',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w900,
-                                fontSize: 30,
-                                color: Colors.purple
+                            style: GoogleFonts.poppins(
+                              textStyle:
+                                  TextStyle(color: Colors.white, fontSize: 30,fontWeight: FontWeight.w800),
                             ),
                           ),
                         ),
-                        IconButton(
-                            onPressed: () {
-                              Navigator.push(
+                        height: 80,
+                        width: double.infinity,
+                        color: const Color.fromARGB(255, 255, 122, 123),
+                      ),
+                      SizedBox(
+                        height: 60,
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(
+                              blurRadius: 2.0,
+                            ),
+                          ],
+                          color: Colors.white,
+                        ),
+                        height: 400,
+                        width: 300,
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 25, vertical: 50),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Summarizer',
+                                style: GoogleFonts.poppins(
+                                  textStyle: TextStyle(
+                                      color: const Color.fromARGB(
+                                          255, 120, 172, 177),
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ),
+                              Text(
+                                'Choose what you want to summarize...',
+                                style: GoogleFonts.montserrat(
+                                  textStyle: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ),
+                              Row(
+                                children: [
+                                  Column(
+                                    children: [
+                                      GestureDetector(
+                                        onTap: (){
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                     Input(input_type: "text",)),
+                                          );
+                                        },
+                                        child: Icon(
+                                          Icons.edit_document,
+                                          size: 50,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                      Text(
+                                        'Raw text',
+                                        style: GoogleFonts.montserrat(
+                                          textStyle: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w600),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Spacer(),
+                                  Column(
+                                    children: [
+                                      GestureDetector(
+                                        onTap: (){
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => Input(
+                                                      input_type: "article link",
+                                                    )),
+                                          );
+                                        },
+                                        child: Icon(
+                                          Icons.link,
+                                          size: 50,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                      Text(
+                                        'Article',
+                                        style: GoogleFonts.montserrat(
+                                          textStyle: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w600),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                      
+                            ],
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 80,),
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        height: 50,
+                        width: double.infinity,
+                        child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                                backgroundColor: Color.fromARGB(255, 86, 166, 167), // Background color
+                              ),
+                        onPressed: () async{
+                          print("isme aya h");
+                              await FirebaseAuth.instance.signOut();
+                              Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const History(),
+                                  builder: (context) => const Signup(),
                                 ),
                               );
-                            },
-                            icon: const Icon(
-                              Icons.history,
-                              size: 30,
-                            ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 100,
-                  ),
-                  Container(
-                    child: Column(
-                      children: [
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      input = "";
-                                      urlcol = true;
-                                      textcol = false;
-                                      url_type = true;
-                                      text_type = false;
-                                      button = true;
-                                      input_type = "url";
-                                    });
-                                  },
-                                  child: Container(
-                                      height: 30,
-                                      width: 150,
-                                      decoration: BoxDecoration(
-                                          color: urlcol
-                                              ? Colors.white
-                                              : Colors.transparent,
-                                          borderRadius:
-                                              BorderRadius.circular(10)),
-                                      child: const Text(
-                                        "Url",
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w900,
-                                            color: Colors.black87),
-                                      ),
-                                  ),
-                              ),
-                              //  Spacer(),
-                              GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      input = "";
-                                      urlcol = false;
-                                      textcol = true;
-                                      text_type = true;
-                                      url_type = false;
-                                      button = true;
-                                      input_type = "text";
-                                    });
-                                  },
-                                  child: Container(
-                                    height: 30,
-                                    width: 150,
-                                    decoration: BoxDecoration(
-                                        color: textcol
-                                            ? Colors.white
-                                            : Colors.transparent,
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                    child: const Text(
-                                      "Raw text",
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w900,
-                                          color: Colors.black87,
-                                      ),
-                                    ),
-                                  ),
-                              ),
-                            ],
-                        ),
-                        Visibility(
-                          visible: text_type,
-                          child: Container(
-                            margin: const EdgeInsets.fromLTRB(10, 20, 10, 20),
-                            height: 500,
-                            // decoration: BoxDecoration(border: Border.all()),
-                            width: double.infinity,
-                            padding: const EdgeInsets.all(10),
-                            child: TextField(
-                              style: const TextStyle(fontSize: 20),
-                              cursorColor: Colors.black,
-                              // cursorHeight: 20,
-                              keyboardType: TextInputType.multiline,
-                              maxLines: null,
-                              onChanged: (val) {
-                                setState(() {
-                                  input = val;
-                                });
-                              },
-                              decoration: const InputDecoration(
-                                hintText: "Enter your text here......",
-                                hintStyle: TextStyle(fontSize: 20),
-                                contentPadding: EdgeInsets.all(20),
-                                border: InputBorder.none,
-                                labelStyle:
-                                    TextStyle(
-                                        color: Colors.white,
-                                    ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        // url
-                        Visibility(
-                            visible: url_type,
-                            child: Container(
-                              margin: const EdgeInsets.fromLTRB(5, 120, 5, 50),
-                              // decoration: BoxDecoration(border: Border.all()),
-                              child: TextField(
-                                style: const TextStyle(
-                                    color: Colors.black, fontSize: 20),
-                                cursorColor: Colors.black,
-                                keyboardType: TextInputType.multiline,
-                                maxLines: 5,
-                                onChanged: (val) {
-                                  setState(() {
-                                    input = val;
-                                  });
-                                },
-                                decoration: const InputDecoration(
-                                  hintText: "Enter article url....",
-                                  contentPadding: EdgeInsets.all(20),
-                                  border: InputBorder.none,
-                                ),
-                              ),
-                            ),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Visibility(
-                          visible: button,
-                          child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 20.0, vertical: 20.0,
-                                ),
-                                backgroundColor: Colors.teal,
-                                shape: const StadiumBorder(),
-                              ),
-                              onPressed: () {
-                                Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>  Summaryy(text: input,type: input_type,)),
-                            );
-                                print(input);
+                          // void signout() async {
                             
-                                print('hello');
-                                print(user?.email ?? "email");
-                                // Navigator.push(
-                                //   context,
-                                //   MaterialPageRoute(
-                                //       builder: (context) => Summaryy(
-                                //           text: input, type: input_type
-                                //       ),
-                                //   ),
-                                // );
-                                //input="";
-                              },
-                              child: const Text("Summarize"),
-                          ),
-                        )
-                      ],
-                    ),
-                  )
-                ]),
-              ),
+                          //     }
+                        }, child: Text(
+                              'View saved summaries',
+                              style: GoogleFonts.poppins(
+                                textStyle: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                            ),
+                          ))
+                    ],
+                  ),
+                ),
+              ],
+            )
             ),
-         
-        ),
       ),
     );
   }

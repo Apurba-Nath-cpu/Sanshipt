@@ -36,7 +36,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   glassmorphism: ^3.0.0
-  google_fonts: ^4.0.3
+  google_fonts: ^4.0.4
   font_awesome_flutter: ^10.4.0
   lottie: ^2.3.2
   firebase_auth: ^4.6.1
