@@ -1,13 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:sanshipt/utils/utils.dart';
 
 class Show extends StatefulWidget {
-  final String postId;
-  final String title;
-  final String content;
-  final DateTime publishedDate;
-  const Show({
+   String postId;
+   String title;
+   String content;
+   DateTime publishedDate;
+   Show({
     Key? key,
     required this.postId,
     required this.title,
@@ -53,69 +54,119 @@ class _ShowState extends State<Show> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor:  const Color.fromARGB(255, 131, 198, 156),
-         body: SingleChildScrollView(
-           child: SafeArea(child:Padding(padding: const EdgeInsets.all(0),child: Column(children: [
-            Container(
-                  margin: const EdgeInsets.fromLTRB(30,30,30,0),
-                  
-                  height: 100,
-                  decoration: BoxDecoration(border: Border.all(),borderRadius: BorderRadius.circular(10)),
+    Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
+      child: Scaffold(
+        body: Stack(
+          children: [
+            Column(
+              children: [
+                Container(
+                  color: Color.fromARGB(255, 79, 158, 160),
+                  height: 500,
                   width: double.infinity,
-                  padding: const EdgeInsets.all(10),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: 
-                      [
-                        // SizedBox(height: 50,),
-                        Column(
-                          children: [
-                            const Text("Title",style: TextStyle(fontSize: 30,fontWeight: FontWeight.w900,color: Colors.blue),),
-                            const SizedBox(height: 20,),
-                            SingleChildScrollView(
-                              child: SelectionArea(
-                                  child: Text(widget.title),
-                              ),
-                            ),
-                          ],
+                ),
+                Expanded(
+                  child: Container(
+                    color: Colors.white,
+                    width: double.infinity,
+                  ),
+                )
+              ],
+            ),
+            Positioned(
+              top: 50,
+              left: 0,
+              right: 0,
+              child: Column(
+                children: [
+                  Container(
+                    child: Center(
+                      child: Text(
+                        'Sanshipt',
+                        style: GoogleFonts.poppins(
+                          textStyle: TextStyle(
+                              color: Colors.white,
+                              fontSize: 30,
+                              fontWeight: FontWeight.w800),
+                        ),
+                      ),
+                    ),
+                    height: 80,
+                    width: double.infinity,
+                    color: const Color.fromARGB(255, 255, 122, 123),
+                  ),
+                  SizedBox(
+                    height: 50,
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 2.0,
                         ),
                       ],
+                      color: Colors.white,
                     ),
+                    height: 500,
+                    width: 300,
+                    child: Container(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 25, vertical: 50),
+                        child: SelectableText(
+                        widget.content,
+                        style: GoogleFonts.poppins(
+                          textStyle: TextStyle(
+                              color: Colors.black,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w200),
+                        ),
+                      ),
+                        ),
                   ),
-                ),
-                const SizedBox(height: 10,),
-                Container(
-                  margin: const EdgeInsets.fromLTRB(30,30,30,0),
-                  height: 500,
-                  decoration: BoxDecoration(border: Border.all(),borderRadius: BorderRadius.circular(10)),
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(10),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: 
-                      [
-                        // SizedBox(height: 50,),
-                        Column(
-                          children: [
-                            const Text("Summary",style: TextStyle(fontSize: 30,fontWeight: FontWeight.w900,color: Colors.blue),),
-                            const SizedBox(height: 20,),
-                            SingleChildScrollView(
-                              child: SelectionArea(
-                                  child: Text(widget.content,),
-                              ),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
+                  SizedBox(
+                    height: 70,
                   ),
-                ),
-           ],),)),
-         ),
+                  // Container(
+                  //     padding: EdgeInsets.symmetric(horizontal: 10),
+                  //     height: 50,
+                  //     width: double.infinity,
+                  //     child: ElevatedButton(
+                  //       style: ElevatedButton.styleFrom(
+                  //         backgroundColor: Color.fromARGB(
+                  //             255, 86, 166, 167), // Background color
+                  //       ),
+                  //       onPressed: () {
+                  //         Navigator.push(
+                  //           context,
+                  //           MaterialPageRoute(
+                  //               builder: (context) => Summaryy(
+                  //                     text: text,
+                  //                     type: widget.input_type,
+                  //                   )),
+                  //         );
+                  //       },
+                  //       child: Text(
+                  //         'Summarize',
+                  //         style: GoogleFonts.poppins(
+                  //           textStyle: TextStyle(
+                  //               color: Colors.white,
+                  //               fontSize: 15,
+                  //               fontWeight: FontWeight.w600),
+                  //         ),
+                  //       ),
+                  //     )
+                  //     )
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }

@@ -25,6 +25,7 @@ class _SigninState extends State<Signin> {
   bool _isLoading = false;
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
   @override
   void dispose() {
     // TODO: implement dispose
@@ -148,14 +149,73 @@ class _SigninState extends State<Signin> {
                                 ),
                               ),
                             ),
+                            // Container(
+                            //   alignment: Alignment.center,
+                            //   child: Padding(
+                            //     padding:
+                            //         const EdgeInsets.fromLTRB(30, 10, 30, 10),
+                            //     child: TextField(
+                            //       controller: _usernameController,
+                            //       style: const TextStyle(color: Colors.black),
+                            //       decoration: InputDecoration(
+                            //         hintText: "Username",
+                            //         hintStyle:
+                            //             const TextStyle(color: Colors.grey),
+                            //         prefixIcon: const Icon(
+                            //           Icons.person,
+                            //           color: Colors.grey,
+                            //         ),
+                            //         enabledBorder: OutlineInputBorder(
+                            //           borderSide: const BorderSide(
+                            //               width: 1, color: Colors.grey),
+                            //           borderRadius: BorderRadius.circular(40.0),
+                            //         ),
+                            //       ),
+                            //     ),
+                            //   ),
+                            // ),
+                            // Material(
+                            //   borderRadius: BorderRadius.circular(40),
+                            //   child: InkWell(
+                            //     onTap: () => selectImage(),
+                            //     child: Container(
+                            //       child: _image != null
+                            //           ? Material(
+                            //               borderRadius:
+                            //                   BorderRadius.circular(50),
+                            //               child: CircleAvatar(
+                            //                 radius: 40,
+                            //                 backgroundColor: Colors.greenAccent,
+                            //                 child: CircleAvatar(
+                            //                   radius: 38,
+                            //                   backgroundImage:
+                            //                       MemoryImage(_image!),
+                            //                 ),
+                            //               ),
+                            //             )
+                            //           : Material(
+                            //               borderRadius:
+                            //                   BorderRadius.circular(50),
+                            //               child: const CircleAvatar(
+                            //                 radius: 40,
+                            //                 backgroundImage: AssetImage(
+                            //                     'assets/null_dp.png'),
+                            //               ),
+                            //             ),
+                            //     ),
+                            //   ),
+                            // ),
                             ElevatedButton(
-                              onPressed: () {},
-                              child: Text("Signup"),
+                              onPressed: () {
+                                signinUser();
+                              },
+                              child: Text("Signin"),
                               style: ElevatedButton.styleFrom(
                                   backgroundColor: Color.fromARGB(
                                       255, 255, 122, 123) // Background color
                                   ),
                             ),
+
                           ],
                         ),
 
@@ -163,35 +223,35 @@ class _SigninState extends State<Signin> {
                         //   mainAxisAlignment: MainAxisAlignment.center,
                         //   children: [
                         //     //child: Image.network("https://cdn.analyticsvidhya.com/wp-content/uploads/2020/12/166651_5_t4EJl1Iy9B1w5EtX1Zog.jpeg")),
-                        //     Material(
-                        //       borderRadius: BorderRadius.circular(40),
-                        //       child: InkWell(
-                        //         onTap: () => selectImage(),
-                        //         child: Container(
-                        //           child: _image != null
-                        //               ? Material(
-                        //                   borderRadius: BorderRadius.circular(50),
-                        //                   child: CircleAvatar(
-                        //                     radius: 40,
-                        //                     backgroundColor: Colors.greenAccent,
-                        //                     child: CircleAvatar(
-                        //                       radius: 38,
-                        //                       backgroundImage:
-                        //                           MemoryImage(_image!),
-                        //                     ),
-                        //                   ),
-                        //                 )
-                        //               : Material(
-                        //                   borderRadius: BorderRadius.circular(50),
-                        //                   child: const CircleAvatar(
-                        //                     radius: 40,
-                        //                     backgroundImage: AssetImage(
-                        //                         'assets/null_dp.png'),
-                        //                   ),
-                        //                 ),
-                        //         ),
-                        //       ),
-                        //     ),
+                            // Material(
+                            //   borderRadius: BorderRadius.circular(40),
+                            //   child: InkWell(
+                            //     onTap: () => selectImage(),
+                            //     child: Container(
+                            //       child: _image != null
+                            //           ? Material(
+                            //               borderRadius: BorderRadius.circular(50),
+                            //               child: CircleAvatar(
+                            //                 radius: 40,
+                            //                 backgroundColor: Colors.greenAccent,
+                            //                 child: CircleAvatar(
+                            //                   radius: 38,
+                            //                   backgroundImage:
+                            //                       MemoryImage(_image!),
+                            //                 ),
+                            //               ),
+                            //             )
+                            //           : Material(
+                            //               borderRadius: BorderRadius.circular(50),
+                            //               child: const CircleAvatar(
+                            //                 radius: 40,
+                            //                 backgroundImage: AssetImage(
+                            //                     'assets/null_dp.png'),
+                            //               ),
+                            //             ),
+                            //     ),
+                            //   ),
+                            // ),
                         //     Container(
                         //       alignment: Alignment.center,
                         //       child: Padding(
@@ -216,35 +276,35 @@ class _SigninState extends State<Signin> {
                         //   ),
                         // ),
                         //       ),
-                        //     ),
-                        //     Container(
-                        //       alignment: Alignment.center,
-                        //       child: Padding(
-                        //         padding:
-                        //         const EdgeInsets.fromLTRB(30, 10, 30, 10),
-                        //         child: TextField(
+                            // ),
+                            // Container(
+                            //   alignment: Alignment.center,
+                            //   child: Padding(
+                            //     padding:
+                            //     const EdgeInsets.fromLTRB(30, 10, 30, 10),
+                            //     child: TextField(
 
-                        //           controller: _usernameController,
-                        //           style: const TextStyle(color: Colors.black),
-                        //           decoration: InputDecoration(
-                        //             hintText: "Username",
-                        //             hintStyle:
-                        //             const TextStyle(color: Colors.grey),
-                        //             prefixIcon: const Icon(
-                        //               Icons.person,
-                        //               color: Colors.grey,
-                        //             ),
-                        //             enabledBorder: OutlineInputBorder(
+                            //       controller: _usernameController,
+                            //       style: const TextStyle(color: Colors.black),
+                            //       decoration: InputDecoration(
+                            //         hintText: "Username",
+                            //         hintStyle:
+                            //         const TextStyle(color: Colors.grey),
+                            //         prefixIcon: const Icon(
+                            //           Icons.person,
+                            //           color: Colors.grey,
+                            //         ),
+                            //         enabledBorder: OutlineInputBorder(
 
-                        //               borderSide: const BorderSide(
+                            //           borderSide: const BorderSide(
 
-                        //                   width: 1, color: Colors.grey),
-                        //               borderRadius: BorderRadius.circular(40.0),
-                        //             ),
-                        //           ),
-                        //         ),
-                        //       ),
-                        //     ),
+                            //               width: 1, color: Colors.grey),
+                            //           borderRadius: BorderRadius.circular(40.0),
+                            //         ),
+                            //       ),
+                            //     ),
+                            //   ),
+                            // ),
                         //     Container(
                         //       alignment: Alignment.center,
                         //       child: Padding(

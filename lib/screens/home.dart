@@ -73,14 +73,28 @@ class _HomeState extends State<Home> {
                   child: Column(
                     children: [
                       Container(
-                        child: Center(
-                          child: Text(
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            CircleAvatar(radius: 0,),
+                            Text(
                             'Sanshipt',
                             style: GoogleFonts.poppins(
-                              textStyle:
-                                  TextStyle(color: Colors.white, fontSize: 30,fontWeight: FontWeight.w800),
+                              textStyle: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.w800),
                             ),
-                          ),
+                                                    ),
+                         
+                          GestureDetector(onTap: () {
+                            Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(builder: (context) => Signup())
+                            );
+                            logout();
+                          }, child: Icon(Icons.logout,color: Colors.white,))
+                          ],
                         ),
                         height: 80,
                         width: double.infinity,
@@ -165,7 +179,7 @@ class _HomeState extends State<Home> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) => Input(
-                                                      input_type: "article link",
+                                                      input_type: "url",
                                                     )),
                                           );
                                         },
@@ -204,13 +218,18 @@ class _HomeState extends State<Home> {
                               ),
                         onPressed: () async{
                           print("isme aya h");
-                              await FirebaseAuth.instance.signOut();
-                              Navigator.pushReplacement(
+                          Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => const Signup(),
-                                ),
+                                    builder: (context) => const History()),
                               );
+                              // await FirebaseAuth.instance.signOut();
+                              // Navigator.pushReplacement(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //     builder: (context) => const Signup(),
+                              //   ),
+                              // );
                           // void signout() async {
                             
                           //     }

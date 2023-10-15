@@ -12,6 +12,7 @@ class Input extends StatefulWidget {
 
 class _InputState extends State<Input> {
   @override
+  String text="";
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
@@ -72,6 +73,9 @@ class _InputState extends State<Input> {
                     child: Container(
                       padding: EdgeInsets.symmetric(horizontal: 25, vertical: 50),
                       child: TextField(
+                        onChanged: (value) {
+                          text=value;
+                        },
                         style: GoogleFonts.lato(textStyle: TextStyle(color: Colors.black)),
                         maxLines: null,
                         keyboardType: TextInputType.multiline,
@@ -95,7 +99,7 @@ class _InputState extends State<Input> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => Summaryy(text: "bfk2ebfirw",type: "dbwegidfe",)),
+                                builder: (context) => Summaryy(text: text,type:widget.input_type,)),
                           );
                         },
                         child: Text(

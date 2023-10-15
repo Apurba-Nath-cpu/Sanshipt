@@ -23,100 +23,106 @@ class Summaryy extends StatefulWidget {
 
 class _SummaryyState extends State<Summaryy> {
   @override
+  
   bool isload = true;
-  String summ = "";
+  String summ = "dvbtgn";
   bool save = true;
   String title="";
   @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   super.initState();
-  //   final List l = widget.text.split(' ');
-  //   print(l.length);
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    final List l = widget.text.split(' ');
+    print(l.length);
 
-  //   if (widget.text == '') {
-  //     summ = "Cannot summarize empty text!!!";
-  //     isload = false;
-  //     save = false;
-  //   } else if (l.length < 10 && widget.type == 'text') {
-  //     summ = "Enter atleast 40 words";
-  //     isload = false;
-  //     save = false;
-  //   } else {
-  //     sendLongText(widget.text);
-  //   }
-  // }
+    if (widget.text == '') {
+      summ = "Cannot summarize empty text!!!";
+      isload = false;
+      save = false;
+    } else if (l.length < 10 && widget.type == 'text') {
+      summ = "Enter atleast 40 words";
+      isload = false;
+      save = false;
+    } 
+    else {
+      sendLongText(widget.text);
+    }
+  }
 
-  // Future<void> sendLongText(String input_text) async {
-  //   String url = apiUrl;
-  //   print('res start');
-  //   try {
-  //     final response = await http.post(Uri.parse(url),
-  //         headers: {'Content-Type': 'application/json'},
-  //         // body: {}
-  //         body: jsonEncode({
-  //           'input_text': input_text,
-  //           'model': 'T5',
-  //           'min_length': 10,
-  //           'max_length': 80,
-  //           'input_type': widget.type,
-  //           //'input_type': 'text',
-  //         }));
+  Future<void> sendLongText(String input_text) async {
+    print(widget.type);
+    print(input_text);
+    String url = apiUrl;
+    print('res start');
+    try {
+      final response = await http.post(Uri.parse(url),
+          headers: {'Content-Type': 'application/json'},
+          // body: {}
+          body: jsonEncode({
+            'input_text': input_text,
+            'model': 'T5',
+            'min_length': 10,
+            'max_length': 80,
+            'input_type': widget.type,
+            //'input_type': 'text',
+          }));
 
-  //     summ = ('${jsonDecode(response.body)['output_text']}');
-  //     print(summ);
-  //     setState(() {
-  //       isload = false;
-  //     });
-  //   } catch (e) {
-  //     summ = "Sorry could not summarize the given text.";
-  //     setState(() {
-  //       isload = false;
-  //       save=false;
-  //     });
-  //     print(summ);
-  //     print(e);
-  //   }
+      summ = ('${jsonDecode(response.body)['output_text']}');
+      print(summ);
+      setState(() {
+        isload = false;
+      });
+    } catch (e) {
+      summ = "Sorry could not summarize the given text.";
+      setState(() {
+        isload = false;
+        save=false;
+      });
+      print(summ);
+      print(e);
+    }
 
-  //   print('res end');
-  // }
+    print('res end');
+  }
 
-  // void uploadSummary(
-  //     String title, String summary, String uid, String username) async {
-  //   try {
-  //     String res = "error";
-  //     res = await FirestoreMethods().uploadPost(
-  //       title: title,
-  //       summary: summary,
-  //       uid: uid,
-  //       username: username,
-  //     );
-  //     // if (res == "success") {
-  //     //   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-  //     //     content: Text("Posted"),
-  //     //   ));
-  //     // } else {
-  //     //   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-  //     //     content: Text("res"),
-  //     //   ));
-  //     // }
-  //     print('$res + LOLOLOL');
-  //   } catch (err) {
-  //     showSnackBar(err.toString(), context);
-  //   }
-  // }
+  void uploadSummary(
+    
+      String title, String summary, String uid, String username) async {
+        print("save wale me aya hai");
+    try {
+      String res = "error";
+      res = await FirestoreMethods().uploadPost(
+        title: title,
+        summary: summary,
+        uid: uid,
+        username: username,
+      );
+      // if (res == "success") {
+      //   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+      //     content: Text("Posted"),
+      //   ));
+      // } else {
+      //   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+      //     content: Text("res"),
+      //   ));
+      // }
+      print('$res + LOLOLOL');
+    } catch (err) {
+      showSnackBar(err.toString(), context);
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
     final model.User? user = Provider.of<UserProvider>(context).getUser;
-
     return GestureDetector(
       onTap: () {
               FocusManager.instance.primaryFocus?.unfocus();
             },
       child: Scaffold(
           resizeToAvoidBottomInset: false,
-          body: Stack(
+          body: isload?Container(child: Center(child: CircularProgressIndicator())): Stack(
             children: [
               Column(
                 children: [
@@ -171,15 +177,15 @@ class _SummaryyState extends State<Summaryy> {
                       height: 400,
                       width: 300,
                       padding: EdgeInsets.symmetric(horizontal: 30,vertical: 30),
-                      child: SelectableText('''The environment is everything that surrounds us, including the air we breathe, the water we drink, the land we live on, and all the living and non-living things that share our planet. It is essential for our survival and well-being, providing us with food, shelter, and other resources.
-
-The environment is also home to a vast array of biodiversity, from the smallest microorganisms to the largest whales. This biodiversity plays a vital role in maintaining the balance of nature and ensuring the health of the planet.
-
-However, human activities are having a devastating impact on the environment. We are polluting the air and water, destroying forests, and driving many species to extinction. This is causing climate change, which is already having a serious impact on people and ecosystems around the world.
-
-It is clear that we need to take action to protect the environment. We need to reduce our reliance on fossil fuels, transition to renewable energy, and protect our forests and other natural areas. We also need to change our consumption habits and reduce our waste.
-
-Protecting the environment is not just about saving the planet for future generations. It is also about ensuring our own health and well-being. A clean and healthy environment is essential for our physical and mental health.''')
+                      child: SelectableText(
+                        summ,
+                        style: GoogleFonts.poppins(
+                          textStyle: TextStyle(
+                              color: Colors.black,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w300),
+                        ),
+                      ),
                     ),
                     SizedBox(
                       height: 80,
@@ -193,7 +199,55 @@ Protecting the environment is not just about saving the planet for future genera
                             backgroundColor: Color.fromARGB(
                                 255, 86, 166, 167), // Background color
                           ),
-                          onPressed: () {},
+                          onPressed: () async{
+                              showDialog<void>(
+                                    context: context,
+                                    barrierDismissible:
+                                        true, // user must tap button!
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        backgroundColor:
+                                            Color.fromARGB(255, 79, 158, 160),
+                                        title: Text(
+                                          'Enter a title',
+                                          style: GoogleFonts.poppins(
+                                            textStyle: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w200),
+                                          ),
+                                        ),
+                                        content: TextField(
+                                          onChanged: (value) {
+                                            title = value;
+                                          },
+                                        ),
+                                        actions: [
+                                          TextButton(
+                                            child: Text(
+                                              'OK',
+                                              style: GoogleFonts.poppins(
+                                                textStyle: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 15,
+                                                    fontWeight:
+                                                        FontWeight.w200),
+                                              ),
+                                            ),
+                                            onPressed: () {
+                                              print(title);
+                                                         uploadSummary(title, summ,
+                                                  user!.uid, user.username);
+                                              Navigator.of(context).pop();
+                                            },
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                            print("ye hai title");
+                            print(title);
+                          },
                           child: Text(
                             'Save',
                             style: GoogleFonts.poppins(

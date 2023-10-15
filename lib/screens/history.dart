@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:sanshipt/screens/show.dart';
 import 'package:sanshipt/models/user.dart' as model;
@@ -38,11 +39,21 @@ class _HistoryState extends State<History> {
   Widget build(BuildContext context) {
     final model.User? user = Provider.of<UserProvider>(context).getUser;
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 131, 198, 156),
+      backgroundColor: Color.fromARGB(255, 79, 150, 160),
       appBar: AppBar(
         elevation: 0,
-        title: Container(margin: EdgeInsets.fromLTRB(100,100,100,100), child: Text("Saved summaries",style: TextStyle(color: Colors.black,fontWeight: FontWeight.w900),)),
-         backgroundColor: const Color.fromARGB(255, 131, 198, 156),
+        title: Center(
+          child: Text(
+                'Saved Summaries',
+                style: GoogleFonts.poppins(
+                  textStyle: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w800),
+                ),
+              ),
+        ),
+         backgroundColor: Colors.transparent,
         automaticallyImplyLeading: false,
       ),
       body: Container(
@@ -60,11 +71,13 @@ class _HistoryState extends State<History> {
                   height: 80,
                   child: Card(
                     elevation: 3,
-                    color: Colors.blueGrey,
+                    // color: Color.fromARGB(255, 255, 122, 123),
+                    color: Colors.white,
                     // color: Colors.transparent,
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
+                        
                         GestureDetector(
                           onTap: () {
                             print(snapshot.data?.docs.length);
@@ -88,7 +101,9 @@ class _HistoryState extends State<History> {
                                 scrollDirection: Axis.horizontal,
                                 child: Text(
                                   snapshot.data!.docs[index].data()['title'],
-                                  style: const TextStyle(color: Colors.white),
+                                  style:  GoogleFonts.lato(
+                                            textStyle:
+                                                TextStyle(color: Colors.black,fontSize: 20,fontWeight: FontWeight.w900)),
                                 ),
                               ),
                           ),
@@ -117,7 +132,7 @@ class _HistoryState extends State<History> {
                     ),
                   ),
                 ) :
-               Center(child: Text("No saved summary to display"))
+               null
               );
             }
             return Center(child: CircularProgressIndicator(),);
