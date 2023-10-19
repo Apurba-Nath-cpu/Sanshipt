@@ -123,13 +123,14 @@ class _SummaryyState extends State<Summaryy> {
       child: Scaffold(
           resizeToAvoidBottomInset: false,
           body: isload
-              ? Container(child: Center(child: CircularProgressIndicator()))
+              ? Container(
+                  child: const Center(child: CircularProgressIndicator()))
               : Stack(
                   children: [
                     Column(
                       children: [
                         Container(
-                          color: Color.fromARGB(255, 79, 158, 160),
+                          color: const Color.fromARGB(255, 79, 158, 160),
                           height: 300,
                           width: double.infinity,
                         ),
@@ -148,28 +149,28 @@ class _SummaryyState extends State<Summaryy> {
                       child: Column(
                         children: [
                           Container(
+                            height: 80,
+                            width: double.infinity,
+                            color: const Color.fromARGB(255, 255, 122, 123),
                             child: Center(
                               child: Text(
                                 'Summary',
                                 style: GoogleFonts.poppins(
-                                  textStyle: TextStyle(
+                                  textStyle: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 30,
                                       fontWeight: FontWeight.w800),
                                 ),
                               ),
                             ),
-                            height: 80,
-                            width: double.infinity,
-                            color: const Color.fromARGB(255, 255, 122, 123),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 60,
                           ),
                           Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
-                              boxShadow: [
+                              boxShadow: const [
                                 BoxShadow(
                                   blurRadius: 2.0,
                                 ),
@@ -178,28 +179,29 @@ class _SummaryyState extends State<Summaryy> {
                             ),
                             height: 400,
                             width: 300,
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                                 horizontal: 30, vertical: 30),
                             child: SelectableText(
                               summ,
                               style: GoogleFonts.poppins(
-                                textStyle: TextStyle(
+                                textStyle: const TextStyle(
                                     color: Colors.black,
                                     fontSize: 15,
                                     fontWeight: FontWeight.w300),
                               ),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 80,
                           ),
                           Container(
-                              padding: EdgeInsets.symmetric(horizontal: 10),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
                               height: 50,
                               width: double.infinity,
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: Color.fromARGB(
+                                  backgroundColor: const Color.fromARGB(
                                       255, 86, 166, 167), // Background color
                                 ),
                                 onPressed: () async {
@@ -209,12 +211,12 @@ class _SummaryyState extends State<Summaryy> {
                                         true, // user must tap button!
                                     builder: (BuildContext context) {
                                       return AlertDialog(
-                                        backgroundColor:
-                                            Color.fromARGB(255, 79, 158, 160),
+                                        backgroundColor: const Color.fromARGB(
+                                            255, 79, 158, 160),
                                         title: Text(
                                           'Enter a title',
                                           style: GoogleFonts.poppins(
-                                            textStyle: TextStyle(
+                                            textStyle: const TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 20,
                                                 fontWeight: FontWeight.w200),
@@ -230,7 +232,7 @@ class _SummaryyState extends State<Summaryy> {
                                             child: Text(
                                               'OK',
                                               style: GoogleFonts.poppins(
-                                                textStyle: TextStyle(
+                                                textStyle: const TextStyle(
                                                     color: Colors.white,
                                                     fontSize: 15,
                                                     fontWeight:
@@ -238,6 +240,7 @@ class _SummaryyState extends State<Summaryy> {
                                               ),
                                             ),
                                             onPressed: () {
+                                              print(user);
                                               print(title);
                                               uploadSummary(
                                                 title, summ,
@@ -257,7 +260,7 @@ class _SummaryyState extends State<Summaryy> {
                                 child: Text(
                                   'Save',
                                   style: GoogleFonts.poppins(
-                                    textStyle: TextStyle(
+                                    textStyle: const TextStyle(
                                         color: Colors.white,
                                         fontSize: 15,
                                         fontWeight: FontWeight.w600),

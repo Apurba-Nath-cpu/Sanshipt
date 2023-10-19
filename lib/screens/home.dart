@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -60,7 +61,7 @@ class _HomeState extends State<Home> {
                 Column(
                   children: [
                     Container(
-                      color: Color.fromARGB(255, 79, 158, 160),
+                      color: const Color.fromARGB(255, 79, 158, 160),
                       height: 300,
                       width: double.infinity,
                     ),
@@ -73,40 +74,47 @@ class _HomeState extends State<Home> {
                   child: Column(
                     children: [
                       Container(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            CircleAvatar(radius: 0,),
-                            Text(
-                            'Sanshipt',
-                            style: GoogleFonts.poppins(
-                              textStyle: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.w800),
-                            ),
-                                                    ),
-                         
-                          GestureDetector(onTap: () {
-                            Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(builder: (context) => Signup())
-                            );
-                            logout();
-                          }, child: Icon(Icons.logout,color: Colors.white,))
-                          ],
-                        ),
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
                         height: 80,
                         width: double.infinity,
                         color: const Color.fromARGB(255, 255, 122, 123),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const CircleAvatar(
+                              radius: 0,
+                            ),
+                            Text(
+                              'Sanshipt',
+                              style: GoogleFonts.poppins(
+                                textStyle: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.w800),
+                              ),
+                            ),
+                            GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).pushReplacement(
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const Signup()));
+                                  logout();
+                                },
+                                child: const Icon(
+                                  Icons.logout,
+                                  color: Colors.white,
+                                ))
+                          ],
+                        ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 60,
                       ),
                       Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
+                          boxShadow: const [
                             BoxShadow(
                               blurRadius: 2.0,
                             ),
@@ -116,7 +124,7 @@ class _HomeState extends State<Home> {
                         height: 400,
                         width: 300,
                         child: Container(
-                          padding: EdgeInsets.symmetric(
+                          padding: const EdgeInsets.symmetric(
                               horizontal: 25, vertical: 50),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -124,9 +132,8 @@ class _HomeState extends State<Home> {
                               Text(
                                 'Summarizer',
                                 style: GoogleFonts.poppins(
-                                  textStyle: TextStyle(
-                                      color: const Color.fromARGB(
-                                          255, 120, 172, 177),
+                                  textStyle: const TextStyle(
+                                      color: Color.fromARGB(255, 120, 172, 177),
                                       fontSize: 30,
                                       fontWeight: FontWeight.w600),
                                 ),
@@ -134,7 +141,7 @@ class _HomeState extends State<Home> {
                               Text(
                                 'Choose what you want to summarize...',
                                 style: GoogleFonts.montserrat(
-                                  textStyle: TextStyle(
+                                  textStyle: const TextStyle(
                                       color: Colors.black,
                                       fontSize: 12,
                                       fontWeight: FontWeight.w600),
@@ -145,15 +152,17 @@ class _HomeState extends State<Home> {
                                   Column(
                                     children: [
                                       GestureDetector(
-                                        onTap: (){
+                                        onTap: () {
+                                          print("raw text tap...");
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                                builder: (context) =>
-                                                     Input(input_type: "text",)),
+                                                builder: (context) => Input(
+                                                      input_type: "text",
+                                                    )),
                                           );
                                         },
-                                        child: Icon(
+                                        child: const Icon(
                                           Icons.edit_document,
                                           size: 50,
                                           color: Colors.black,
@@ -162,7 +171,7 @@ class _HomeState extends State<Home> {
                                       Text(
                                         'Raw text',
                                         style: GoogleFonts.montserrat(
-                                          textStyle: TextStyle(
+                                          textStyle: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
                                               fontWeight: FontWeight.w600),
@@ -170,11 +179,11 @@ class _HomeState extends State<Home> {
                                       ),
                                     ],
                                   ),
-                                  Spacer(),
+                                  const Spacer(),
                                   Column(
                                     children: [
                                       GestureDetector(
-                                        onTap: (){
+                                        onTap: () {
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(
@@ -183,7 +192,7 @@ class _HomeState extends State<Home> {
                                                     )),
                                           );
                                         },
-                                        child: Icon(
+                                        child: const Icon(
                                           Icons.link,
                                           size: 50,
                                           color: Colors.black,
@@ -192,7 +201,7 @@ class _HomeState extends State<Home> {
                                       Text(
                                         'Article',
                                         style: GoogleFonts.montserrat(
-                                          textStyle: TextStyle(
+                                          textStyle: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 12,
                                               fontWeight: FontWeight.w600),
@@ -202,23 +211,27 @@ class _HomeState extends State<Home> {
                                   ),
                                 ],
                               ),
-                      
                             ],
                           ),
                         ),
                       ),
-                      SizedBox(height: 80,),
+                      const SizedBox(
+                        height: 80,
+                      ),
                       Container(
-                        padding: EdgeInsets.symmetric(horizontal: 10),
-                        height: 50,
-                        width: double.infinity,
-                        child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                                backgroundColor: Color.fromARGB(255, 86, 166, 167), // Background color
-                              ),
-                        onPressed: () async{
-                          print("isme aya h");
-                          Navigator.push(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          height: 50,
+                          width: MediaQuery.of(context).size.width * 0.6,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color.fromARGB(
+                                  255, 86, 166, 167), // Background color
+                            ),
+                            onPressed: () async {
+                              if (kDebugMode) {
+                                print("isme aya h");
+                              }
+                              Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => const History()),
@@ -230,13 +243,14 @@ class _HomeState extends State<Home> {
                               //     builder: (context) => const Signup(),
                               //   ),
                               // );
-                          // void signout() async {
-                            
-                          //     }
-                        }, child: Text(
+                              // void signout() async {
+
+                              //     }
+                            },
+                            child: Text(
                               'View saved summaries',
                               style: GoogleFonts.poppins(
-                                textStyle: TextStyle(
+                                textStyle: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 15,
                                     fontWeight: FontWeight.w600),
@@ -247,8 +261,7 @@ class _HomeState extends State<Home> {
                   ),
                 ),
               ],
-            )
-            ),
+            )),
       ),
     );
   }
