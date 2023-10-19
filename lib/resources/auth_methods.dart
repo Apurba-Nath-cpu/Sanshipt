@@ -20,38 +20,37 @@ class AuthMethods {
     return model.User.fromSnap(snap);
   }
 
-  Future<String> updateUserName(String newDisplayName) async {
-    User? currentUser = FirebaseAuth.instance.currentUser;
+  // Future<String> updateUserName(String newDisplayName) async {
+  //   User? currentUser = FirebaseAuth.instance.currentUser;
 
-    if (currentUser != null) {
-      // Update the display name in Firebase Auth
-      await currentUser.updateDisplayName(newDisplayName);
+  //   if (currentUser != null) {
+  //     // Update the display name in Firebase Auth
+  //     await currentUser.updateDisplayName(newDisplayName);
 
-      // Also update the display name in Firestore if you store user data there
-      await FirebaseFirestore.instance
-          .collection('users')
-          .doc(currentUser?.uid)
-          .update({'username': newDisplayName});
-      return "Edited";
-    } else {
-      return "Please log in first";
-    }
-  }
-
+  //     // Also update the display name in Firestore if you store user data there
+  //     await FirebaseFirestore.instance
+  //         .collection('users')
+  //         .doc(currentUser?.uid)
+  //         .update({'username': newDisplayName});
+  //     return "Edited";
+  //   } else {
+  //     return "Please log in first";
+  //   }
+  // }
 
   // sign up user
   Future<String> signUpUser({
     required String email,
     required String password,
-    required String username,
-    required Uint8List file,
+    // required String username,
+    // required Uint8List file,
   }) async {
     String res = "Some error occured";
     try {
-      if (email.isNotEmpty &&
-          password.isNotEmpty &&
-          username.isNotEmpty &&
-          file != null) {
+      if (email.isNotEmpty && password.isNotEmpty
+          // username.isNotEmpty &&
+          // file != null
+          ) {
         print("In-if");
         print('${email}');
         // email = 'test3@gmail.com';
@@ -66,17 +65,17 @@ class AuthMethods {
         print(cred.user?.uid);
         print("Mid-if");
 
-        String photoUrl = await StorageMethods()
-            .uploadImageTostorage('profilePics', file, false);
-        print('Mid-2');
+        // String photoUrl = await StorageMethods()
+        // .uploadImageTostorage('profilePics', file, false);
+        // print('Mid-2');
 
         // add user to our database
 
         model.User user = model.User(
-          username: username,
+          // username: username,
           uid: cred.user!.uid,
           email: email,
-          photoUrl: photoUrl,
+          // photoUrl: photoUrl,
         );
 
         await _firestore
@@ -112,7 +111,7 @@ class AuthMethods {
 
     print('${email}');
     String email2 = 'test3@gmail.com';
-    if(email == email2){
+    if (email == email2) {
       print('equal');
     }
     print('${email}');

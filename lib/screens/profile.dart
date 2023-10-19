@@ -14,8 +14,7 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   @override
-
-   void signout() async {
+  void signout() async {
     await FirebaseAuth.instance.signOut();
     Navigator.pushReplacement(
       context,
@@ -24,6 +23,7 @@ class _ProfileState extends State<Profile> {
       ),
     );
   }
+
   @override
   Widget build(BuildContext context) {
     final model.User? user = Provider.of<UserProvider>(context).getUser;
@@ -38,53 +38,58 @@ class _ProfileState extends State<Profile> {
       },
       child: Scaffold(
         backgroundColor: const Color.fromARGB(255, 131, 198, 156),
-       // appBar: AppBar(elevation: 0, automaticallyImplyLeading: false, title: Center(child: Text("Profile",style: TextStyle(fontSize: 30,),),),backgroundColor: Colors.transparent,),
+        // appBar: AppBar(elevation: 0, automaticallyImplyLeading: false, title: Center(child: Text("Profile",style: TextStyle(fontSize: 30,),),),backgroundColor: Colors.transparent,),
         body: SafeArea(
           child: Padding(
-          padding: const EdgeInsets.all(30),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
+            padding: const EdgeInsets.all(30),
+            child: SingleChildScrollView(
+              child: Column(children: [
                 // SizedBox(
                 //   height: 50,
                 // ),
-                const Text("Profile",style: TextStyle(fontSize: 30,color: Colors.white),),
-                const SizedBox(height: 50,),
-                GestureDetector(
-                  onTap: () {
-                    print("dp");
-                    showDialog(
-                        context: context,
-                        builder: (_) => SimpleDialog(
-                          children: [
-                            Container(
-                              height: 350,
-                              width: 100,
-                              child: Image(
-                                image: NetworkImage(
-                                  user?.photoUrl ??
-                                      "https://th.bing.com/th/id/OIP.mqCSNfJntVSLuyZoWOvrlwHaE8?w=273&h=182&c=7&r=0&o=5&dpr=1.3&pid=1.7",
-                                ),
-                              ),
-                            )
-                          ],
-                      ),
-                    );
-                  },
-                  child: CircleAvatar(
-                    radius: 80,
-                    backgroundImage: NetworkImage(
-                      user?.photoUrl ??
-                      "https://th.bing.com/th/id/OIP.mqCSNfJntVSLuyZoWOvrlwHaE8?w=273&h=182&c=7&r=0&o=5&dpr=1.3&pid=1.7",
-                    ),
-                  ),
+                const Text(
+                  "Profile",
+                  style: TextStyle(fontSize: 30, color: Colors.white),
                 ),
+                const SizedBox(
+                  height: 50,
+                ),
+                // GestureDetector(
+                //   onTap: () {
+                //     print("dp");
+                //     showDialog(
+                //         context: context,
+                //         builder: (_) => SimpleDialog(
+                //           children: [
+                //             Container(
+                //               height: 350,
+                //               width: 100,
+                //               child: Image(
+                //                 image: NetworkImage(
+                //                   user?.photoUrl ??
+                //                       "https://th.bing.com/th/id/OIP.mqCSNfJntVSLuyZoWOvrlwHaE8?w=273&h=182&c=7&r=0&o=5&dpr=1.3&pid=1.7",
+                //                 ),
+                //               ),
+                //             )
+                //           ],
+                //       ),
+                //     );
+                //   },
+                //   child: CircleAvatar(
+                //     radius: 80,
+                //     backgroundImage: NetworkImage(
+                //       user?.photoUrl ??
+                //       "https://th.bing.com/th/id/OIP.mqCSNfJntVSLuyZoWOvrlwHaE8?w=273&h=182&c=7&r=0&o=5&dpr=1.3&pid=1.7",
+                //     ),
+                //   ),
+                // ),
                 const SizedBox(
                   height: 50,
                 ),
                 Text(
                   user?.email ?? "",
-                  style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
+                  style: const TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.w900),
                 ),
                 const SizedBox(
                   height: 40,
@@ -103,16 +108,16 @@ class _ProfileState extends State<Profile> {
                           },
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12),
+                              borderRadius: BorderRadius.circular(12),
                             ),
-                            label: Center(
-                                child: Text(
-                                    user?.username ?? "",
-                                ),
-                            ),
+                            // label: Center(
+                            //   child: Text(
+                            //     user?.username ?? "",
+                            //   ),
+                            // ),
                             prefixIcon: const Icon(Icons.person),
                             prefixIconColor: Colors.brown,
-                            
+
                             //  contentPadding: EdgeInsets.all(20),
                             labelStyle: const TextStyle(color: Colors.white),
                             enabledBorder: OutlineInputBorder(
@@ -120,7 +125,6 @@ class _ProfileState extends State<Profile> {
 
                               //<-- SEE HERE
                               borderSide: const BorderSide(
-                                
                                 color: Colors.blueGrey,
                               ),
                             ),
@@ -155,7 +159,9 @@ class _ProfileState extends State<Profile> {
                         //     ),
                         //   ),
                         // ),
-                        const SizedBox(height: 20,),
+                        const SizedBox(
+                          height: 20,
+                        ),
 
                         FloatingActionButton.extended(
                           elevation: 0.5,
