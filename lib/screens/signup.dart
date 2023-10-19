@@ -32,7 +32,7 @@ class _SignupState extends State<Signup> {
   bool _isLoading = false;
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _usernameController = TextEditingController();
+  // final TextEditingController _usernameController = TextEditingController();
 
   @override
   void dispose() {
@@ -40,15 +40,15 @@ class _SignupState extends State<Signup> {
     super.dispose();
     _emailController.dispose();
     _passwordController.dispose();
-    _usernameController.dispose();
+    // _usernameController.dispose();
   }
 
-  void selectImage() async {
-    Uint8List im = await pickImage(ImageSource.gallery);
-    setState(() {
-      _image = im;
-    });
-  }
+  // void selectImage() async {
+  //   Uint8List im = await pickImage(ImageSource.gallery);
+  //   setState(() {
+  //     _image = im;
+  //   });
+  // }
 
   void signupUser() async {
     setState(() {
@@ -59,8 +59,8 @@ class _SignupState extends State<Signup> {
     res = await AuthMethods().signUpUser(
       email: _emailController.text.trim(),
       password: _passwordController.text,
-      username: _usernameController.text,
-      file: _image!,
+      // username: _usernameController.text,
+      // file: _image!,
     );
     print(res);
     print('looooooooool');
@@ -69,10 +69,7 @@ class _SignupState extends State<Signup> {
     } else {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => const ResponsiveLayout(
-            webScreenLayout: WebScreenLayout(),
-            mobileScreenLayout: MobileScreenLayout(),
-          ),
+          builder: (context) => Home(),
         ),
       );
     }
@@ -166,8 +163,10 @@ class _SignupState extends State<Signup> {
                             ),
                           ),
                           ElevatedButton(
-                            onPressed: () {},
-                            child: Text("Signup"),
+                            onPressed: () => signupUser(),
+                            child: _isLoading
+                                ? CircularProgressIndicator()
+                                : Text("Signup"),
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: Color.fromARGB(
                                     255, 255, 122, 123) // Background color

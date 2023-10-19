@@ -16,7 +16,7 @@ class FirestoreMethods {
     required String title,
     required String summary,
     required String uid,
-    required String username,
+    // required String username,
   }) async {
     String res = "Some error occured";
     try {
@@ -30,7 +30,7 @@ class FirestoreMethods {
         title: title,
         summary: summary,
         uid: uid,
-        username: username,
+        // username: username,
         postId: postId,
         datePublished: DateTime.now(),
       );
@@ -45,68 +45,68 @@ class FirestoreMethods {
     return res;
   }
 
-  Future<void> likePost(String postId, String uid, List likes) async {
-    if (likes.contains(uid)) {
-      await _firestore.collection('posts').doc(postId).update({
-        'likes': FieldValue.arrayRemove([uid]),
-      });
-    } else {
-      await _firestore.collection('posts').doc(postId).update({
-        'likes': FieldValue.arrayUnion([uid]),
-      });
-    }
-  }
+  // Future<void> likePost(String postId, String uid, List likes) async {
+  //   if (likes.contains(uid)) {
+  //     await _firestore.collection('posts').doc(postId).update({
+  //       'likes': FieldValue.arrayRemove([uid]),
+  //     });
+  //   } else {
+  //     await _firestore.collection('posts').doc(postId).update({
+  //       'likes': FieldValue.arrayUnion([uid]),
+  //     });
+  //   }
+  // }
 
-  Future<void> commentOnPost(String postId, String uid, String name,
-      String comment, String profilePic) async {
-    try {
-      if (comment.isNotEmpty) {
-        String commentId = const Uuid().v1();
-        _firestore
-            .collection('posts')
-            .doc(postId)
-            .collection('comments')
-            .doc(commentId)
-            .set({
-          'profilePic': profilePic,
-          'name': name,
-          'uid': uid,
-          'postId': postId,
-          'text': comment,
-          'commentId': commentId,
-          'datePublished': DateTime.now(),
-          'likes': [],
-        });
-      } else {
-        print('Text is empty');
-      }
-    } catch (err) {
-      print(err.toString());
-    }
-  }
+  // Future<void> commentOnPost(String postId, String uid, String name,
+  //     String comment, String profilePic) async {
+  //   try {
+  //     if (comment.isNotEmpty) {
+  //       String commentId = const Uuid().v1();
+  //       _firestore
+  //           .collection('posts')
+  //           .doc(postId)
+  //           .collection('comments')
+  //           .doc(commentId)
+  //           .set({
+  //         'profilePic': profilePic,
+  //         'name': name,
+  //         'uid': uid,
+  //         'postId': postId,
+  //         'text': comment,
+  //         'commentId': commentId,
+  //         'datePublished': DateTime.now(),
+  //         'likes': [],
+  //       });
+  //     } else {
+  //       print('Text is empty');
+  //     }
+  //   } catch (err) {
+  //     print(err.toString());
+  //   }
+  // }
 
-  Future<void> likeComment(
-      String postId, String uid, String commentId, List commentLikes) async {
-    if (commentLikes.contains(uid)) {
-      await _firestore
-          .collection('posts')
-          .doc(postId)
-          .collection('comments')
-          .doc(commentId)
-          .update({
-        'likes': FieldValue.arrayRemove([uid]),
-      });
-    } else {
-      await _firestore
-          .collection('posts')
-          .doc(postId)
-          .collection('comments')
-          .doc(commentId)
-          .update({
-        'likes': FieldValue.arrayUnion([uid]),
-      });
-    }
-  }
+  // Future<void> likeComment(
+  //     String postId, String uid, String commentId, List commentLikes) async {
+  //   if (commentLikes.contains(uid)) {
+  //     await _firestore
+  //         .collection('posts')
+  //         .doc(postId)
+  //         .collection('comments')
+  //         .doc(commentId)
+  //         .update({
+  //       'likes': FieldValue.arrayRemove([uid]),
+  //     });
+  //   } else {
+  //     await _firestore
+  //         .collection('posts')
+  //         .doc(postId)
+  //         .collection('comments')
+  //         .doc(commentId)
+  //         .update({
+  //       'likes': FieldValue.arrayUnion([uid]),
+  //     });
+  //   }
+  // }
 
   // Delete post
   Future<String> deletePost({required String postId}) async {
@@ -119,32 +119,32 @@ class FirestoreMethods {
     }
   }
 
-  Future<void> followUser(
-    String uid,
-    String followId,
-  ) async {
-    try {
-      DocumentSnapshot snap =
-          await _firestore.collection('users').doc(uid).get();
-      List following = (snap.data()! as dynamic)['following'];
+//   Future<void> followUser(
+//     String uid,
+//     String followId,
+//   ) async {
+//     try {
+//       DocumentSnapshot snap =
+//           await _firestore.collection('users').doc(uid).get();
+//       List following = (snap.data()! as dynamic)['following'];
 
-      if (following.contains(followId)) {
-        await _firestore.collection('users').doc(followId).update({
-          'followers': FieldValue.arrayRemove([uid])
-        });
-        await _firestore.collection('users').doc(uid).update({
-          'following': FieldValue.arrayRemove([followId])
-        });
-      } else {
-        await _firestore.collection('users').doc(followId).update({
-          'followers': FieldValue.arrayUnion([uid])
-        });
-        await _firestore.collection('users').doc(uid).update({
-          'following': FieldValue.arrayUnion([followId])
-        });
-      }
-    } catch (err) {
-      print(err.toString());
-    }
-  }
+//       if (following.contains(followId)) {
+//         await _firestore.collection('users').doc(followId).update({
+//           'followers': FieldValue.arrayRemove([uid])
+//         });
+//         await _firestore.collection('users').doc(uid).update({
+//           'following': FieldValue.arrayRemove([followId])
+//         });
+//       } else {
+//         await _firestore.collection('users').doc(followId).update({
+//           'followers': FieldValue.arrayUnion([uid])
+//         });
+//         await _firestore.collection('users').doc(uid).update({
+//           'following': FieldValue.arrayUnion([followId])
+//         });
+//       }
+//     } catch (err) {
+//       print(err.toString());
+//     }
+//   }
 }
