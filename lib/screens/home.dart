@@ -218,45 +218,38 @@ class _HomeState extends State<Home> {
                       const SizedBox(
                         height: 80,
                       ),
-                      Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          height: 50,
-                          width: MediaQuery.of(context).size.width * 0.6,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color.fromARGB(
-                                  255, 86, 166, 167), // Background color
+                      GestureDetector(
+                          onTap: () async {
+                            if (kDebugMode) {
+                              print("isme aya h");
+                            }
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const History()),
+                            );
+                          },
+                        child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            height: 50,
+                            width: 270,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(30),
+                              color: const Color.fromARGB(255, 86, 166, 167),
                             ),
-                            onPressed: () async {
-                              if (kDebugMode) {
-                                print("isme aya h");
-                              }
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const History()),
-                              );
-                              // await FirebaseAuth.instance.signOut();
-                              // Navigator.pushReplacement(
-                              //   context,
-                              //   MaterialPageRoute(
-                              //     builder: (context) => const Signup(),
-                              //   ),
-                              // );
-                              // void signout() async {
-
-                              //     }
-                            },
-                            child: Text(
-                              'View saved summaries',
-                              style: GoogleFonts.poppins(
-                                textStyle: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w600),
+                            child: Center(
+                              child: Text(
+                                'View saved summaries',
+                                style: GoogleFonts.poppins(
+                                  textStyle: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w600),
+                                ),
                               ),
                             ),
-                          ))
+                        ),
+                      ),
                     ],
                   ),
                 ),

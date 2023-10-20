@@ -1,5 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sanshipt/models/user.dart' as model;
+import '../models/user.dart';
+import '../models/user.dart';
+import '../providers/user_provider.dart';
 
 class WebScreenLayout extends StatefulWidget {
   const WebScreenLayout({Key? key}) : super(key: key);
@@ -29,6 +34,7 @@ class _WebScreenLayoutState extends State<WebScreenLayout> {
   }
 
   Widget build(BuildContext context) {
+    model.User user = Provider.of(context)<UserProvider>(context).getUser();
     return Scaffold(
       body: Container(),
       bottomNavigationBar: CupertinoTabBar(

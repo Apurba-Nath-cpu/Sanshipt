@@ -48,13 +48,6 @@ class _SignupState extends State<Signup> {
     setState(() {
       _isLoading = true;
     });
-
-    if (_passwordController.text != _confirmPasswordController.text) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text("Password and Confirm password should match!"),
-        // margin: EdgeInsets.only(bottom: 300),
-      ));
-    }
     print('${_emailController.text}');
     String res = 'failure';
     res = await AuthMethods().signUpUser(
@@ -66,10 +59,11 @@ class _SignupState extends State<Signup> {
     print(res);
     print('looooooooool');
     if (res != 'success') {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text(res),
-        // margin: EdgeInsets.only(bottom: 300),
-      ));
+      print(res);
+      // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      //   content: Text(res),
+      //   // margin: EdgeInsets.only(bottom: 300),
+      // ));
     } else {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
@@ -184,7 +178,9 @@ class _SignupState extends State<Signup> {
                             ),
                           ),
                           ElevatedButton(
-                            onPressed: () => signupUser(),
+                            onPressed: () {
+                              signupUser();
+                            },
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: const Color.fromARGB(
                                     255, 255, 122, 123) // Background color
