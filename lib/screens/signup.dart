@@ -32,7 +32,8 @@ class _SignupState extends State<Signup> {
   bool _isLoading = false;
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  // final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
 
   @override
   void dispose() {
@@ -40,15 +41,8 @@ class _SignupState extends State<Signup> {
     super.dispose();
     _emailController.dispose();
     _passwordController.dispose();
-    // _usernameController.dispose();
+    _confirmPasswordController.dispose();
   }
-
-  // void selectImage() async {
-  //   Uint8List im = await pickImage(ImageSource.gallery);
-  //   setState(() {
-  //     _image = im;
-  //   });
-  // }
 
   void signupUser() async {
     setState(() {
@@ -65,11 +59,18 @@ class _SignupState extends State<Signup> {
     print(res);
     print('looooooooool');
     if (res != 'success') {
-      // showSnackBar(res, context);
+      print(res);
+      // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      //   content: Text(res),
+      //   // margin: EdgeInsets.only(bottom: 300),
+      // ));
     } else {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => Home(),
+          builder: (context) => const ResponsiveLayout(
+            webScreenLayout: WebScreenLayout(),
+            mobileScreenLayout: MobileScreenLayout(),
+          ),
         ),
       );
     }
@@ -85,9 +86,9 @@ class _SignupState extends State<Signup> {
       home: GestureDetector(
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         child: Scaffold(
-            backgroundColor: Color.fromARGB(255, 86, 166, 167),
+            backgroundColor: const Color.fromARGB(255, 86, 166, 167),
             body: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 50),
+              padding: const EdgeInsets.symmetric(horizontal: 50),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -98,19 +99,19 @@ class _SignupState extends State<Signup> {
                       Text(
                         'Register',
                         style: GoogleFonts.lato(
-                          textStyle: TextStyle(
+                          textStyle: const TextStyle(
                               color: Colors.white,
                               fontSize: 30,
                               fontWeight: FontWeight.w500),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       Text(
                         'Create a new account',
                         style: GoogleFonts.lato(
-                          textStyle: TextStyle(
+                          textStyle: const TextStyle(
                               color: Colors.white,
                               fontSize: 15,
                               fontWeight: FontWeight.w500),
@@ -118,13 +119,13 @@ class _SignupState extends State<Signup> {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 100,
                   ),
                   Center(
                     child: Container(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 50),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 50),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         color: Colors.white,
@@ -137,12 +138,12 @@ class _SignupState extends State<Signup> {
                           TextField(
                             controller: _emailController,
                             style: const TextStyle(color: Colors.black),
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               hintText: "E-mail",
-                              hintStyle: const TextStyle(
+                              hintStyle: TextStyle(
                                   color: Colors.grey,
                                   fontWeight: FontWeight.w500),
-                              prefixIcon: const Icon(
+                              prefixIcon: Icon(
                                 Icons.email,
                                 color: Colors.grey,
                               ),
@@ -152,25 +153,41 @@ class _SignupState extends State<Signup> {
                             controller: _passwordController,
                             style: const TextStyle(color: Colors.black),
                             obscureText: true,
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               hintText: "Password",
-                              hintStyle: const TextStyle(color: Colors.grey),
+                              hintStyle: TextStyle(color: Colors.grey),
                               fillColor: Colors.white,
-                              prefixIcon: const Icon(
+                              prefixIcon: Icon(
+                                Icons.key,
+                                color: Colors.grey,
+                              ),
+                            ),
+                          ),
+                          TextField(
+                            controller: _confirmPasswordController,
+                            style: const TextStyle(color: Colors.black),
+                            obscureText: true,
+                            decoration: const InputDecoration(
+                              hintText: "Confirm Password",
+                              hintStyle: TextStyle(color: Colors.grey),
+                              fillColor: Colors.white,
+                              prefixIcon: Icon(
                                 Icons.key,
                                 color: Colors.grey,
                               ),
                             ),
                           ),
                           ElevatedButton(
-                            onPressed: () => signupUser(),
-                            child: _isLoading
-                                ? CircularProgressIndicator()
-                                : Text("Signup"),
+                            onPressed: () {
+                              signupUser();
+                            },
                             style: ElevatedButton.styleFrom(
-                                backgroundColor: Color.fromARGB(
+                                backgroundColor: const Color.fromARGB(
                                     255, 255, 122, 123) // Background color
                                 ),
+                            child: _isLoading
+                                ? const CircularProgressIndicator()
+                                : const Text("Signup"),
                           ),
                         ],
                       ),
@@ -378,7 +395,7 @@ class _SignupState extends State<Signup> {
                       // ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Row(
@@ -387,7 +404,7 @@ class _SignupState extends State<Signup> {
                       Text(
                         'Already have an account ? ',
                         style: GoogleFonts.lato(
-                          textStyle: TextStyle(
+                          textStyle: const TextStyle(
                               color: Colors.white,
                               fontSize: 15,
                               fontWeight: FontWeight.w500),
@@ -404,7 +421,7 @@ class _SignupState extends State<Signup> {
                         child: Text(
                           ' Signin',
                           style: GoogleFonts.lato(
-                            textStyle: TextStyle(
+                            textStyle: const TextStyle(
                                 color: Color.fromARGB(255, 255, 122, 123),
                                 fontSize: 15,
                                 fontWeight: FontWeight.w500),
