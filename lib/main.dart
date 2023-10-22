@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:sanshipt/providers/user_provider.dart';
 import 'package:sanshipt/responsive/mobile_screen_layout.dart';
@@ -11,6 +12,7 @@ import 'package:sanshipt/screens/home.dart';
 import 'package:sanshipt/screens/signup.dart';
 
 void main() async {
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   WidgetsFlutterBinding.ensureInitialized();
   if (kIsWeb) {
     await Firebase.initializeApp(
