@@ -93,7 +93,10 @@ class _MyAppState extends State<MyApp> {
                   if (snapshot.data == null) {
                     return const Signup();
                   } else {
-                    return const Home();
+                    return const ResponsiveLayout(
+                      webScreenLayout: WebScreenLayout(),
+                      mobileScreenLayout: MobileScreenLayout(),
+                    );
                   }
                 }
               }),
