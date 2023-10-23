@@ -24,11 +24,12 @@ class _HistoryState extends State<History> {
         postId : postId,
       );
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(res),
-        )
+      final snackBar = SnackBar(
+        duration: Duration(milliseconds: 500),
+        backgroundColor: Color.fromARGB(255, 79, 158, 160),
+        content: Center(child: Text('Deleted')),
       );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
       print('$res + LOLOLOL');
     } catch (err) {
       showSnackBar(err.toString(), context);
@@ -39,7 +40,7 @@ class _HistoryState extends State<History> {
   Widget build(BuildContext context) {
     final model.User? user = Provider.of<UserProvider>(context).getUser;
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 79, 150, 160),
+      backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
         title: Center(
@@ -47,7 +48,7 @@ class _HistoryState extends State<History> {
                 'Saved Summaries',
                 style: GoogleFonts.poppins(
                   textStyle: TextStyle(
-                      color: Colors.white,
+                      color: Colors.black,
                       fontSize: 20,
                       fontWeight: FontWeight.w800),
                 ),
@@ -72,7 +73,7 @@ class _HistoryState extends State<History> {
                   child: Card(
                     elevation: 3,
                     // color: Color.fromARGB(255, 255, 122, 123),
-                    color: Colors.white,
+                    color: Color.fromARGB(255, 79, 150, 160),
                     // color: Colors.transparent,
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,

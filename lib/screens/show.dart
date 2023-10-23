@@ -1,20 +1,22 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sanshipt/utils/utils.dart';
+import 'package:file_saver/file_saver.dart';
 
 class Show extends StatefulWidget {
-   String postId;
-   String title;
-   String content;
-   DateTime publishedDate;
-   Show({
-    Key? key,
-    required this.postId,
-    required this.title,
-    required this.content,
-    required this.publishedDate
-  }) : super(key: key);
+  String postId;
+  String title;
+  String content;
+  DateTime publishedDate;
+  Show(
+      {Key? key,
+      required this.postId,
+      required this.title,
+      required this.content,
+      required this.publishedDate})
+      : super(key: key);
 
   @override
   State<Show> createState() => _ShowState();
@@ -26,7 +28,6 @@ class _ShowState extends State<Show> {
   String summaryContent = "";
   // DateTime publishedDate = DateTime.now();
   @override
-
   void initState() {
     // TODO: implement initState
     super.initState();
@@ -34,7 +35,7 @@ class _ShowState extends State<Show> {
   }
 
   void getSummaryData() async {
-    try{
+    try {
       // var summarySnap = await FirebaseFirestore.instance
       //     .collection('posts')
       //     .doc(widget.postId)
@@ -46,15 +47,13 @@ class _ShowState extends State<Show> {
       // print(summaryTitle);
       // print(summaryData['title']);
       // summaryContent = summaryData['content'];
-
-    }
-    catch(e){
+    } catch (e) {
       showSnackBar("Error loading summary info.", context);
     }
   }
 
   @override
-    Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         FocusManager.instance.primaryFocus?.unfocus();
@@ -115,9 +114,9 @@ class _ShowState extends State<Show> {
                     height: 500,
                     width: 300,
                     child: Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 25, vertical: 50),
-                        child: SelectableText(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 25, vertical: 50),
+                      child: SelectableText(
                         widget.content,
                         style: GoogleFonts.poppins(
                           textStyle: TextStyle(
@@ -126,41 +125,41 @@ class _ShowState extends State<Show> {
                               fontWeight: FontWeight.w200),
                         ),
                       ),
-                        ),
+                    ),
                   ),
                   SizedBox(
-                    height: 70,
+                    height: 40,
                   ),
-                  // Container(
-                  //     padding: EdgeInsets.symmetric(horizontal: 10),
-                  //     height: 50,
-                  //     width: double.infinity,
-                  //     child: ElevatedButton(
-                  //       style: ElevatedButton.styleFrom(
-                  //         backgroundColor: Color.fromARGB(
-                  //             255, 86, 166, 167), // Background color
-                  //       ),
-                  //       onPressed: () {
-                  //         Navigator.push(
-                  //           context,
-                  //           MaterialPageRoute(
-                  //               builder: (context) => Summaryy(
-                  //                     text: text,
-                  //                     type: widget.input_type,
-                  //                   )),
-                  //         );
-                  //       },
-                  //       child: Text(
-                  //         'Summarize',
-                  //         style: GoogleFonts.poppins(
-                  //           textStyle: TextStyle(
-                  //               color: Colors.white,
-                  //               fontSize: 15,
-                  //               fontWeight: FontWeight.w600),
-                  //         ),
-                  //       ),
-                  //     )
-                  //     )
+                  Container(
+                      padding: EdgeInsets.symmetric(horizontal: 80),
+                      height: 50,
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color.fromARGB(
+                              255, 86, 166, 167), // Background color
+                        ),
+                        onPressed: () {
+                          final snackBar = SnackBar(
+                            duration: Duration(milliseconds: 200),
+                            backgroundColor: Color.fromARGB(255, 79, 158, 160),
+                            content: Center(child: Text('Text copied')),
+                          );
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                          // Navigator.pop(context);
+                          Clipboard.setData(
+                              ClipboardData(text: widget.content));
+                        },
+                        child: Text(
+                          'Copy summary',
+                          style: GoogleFonts.poppins(
+                            textStyle: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                      )),
                 ],
               ),
             )

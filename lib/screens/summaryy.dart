@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -23,9 +24,9 @@ class Summaryy extends StatefulWidget {
 
 class _SummaryyState extends State<Summaryy> {
   @override
+  bool show_save=true;
   bool isload = true;
   String summ = "dvbtgn";
-  bool save = true;
   String title = "";
   @override
   void initState() {
@@ -37,11 +38,11 @@ class _SummaryyState extends State<Summaryy> {
     if (widget.text == '') {
       summ = "Cannot summarize empty text!!!";
       isload = false;
-      save = false;
+      show_save=false;
     } else if (l.length < 10 && widget.type == 'text') {
       summ = "Enter atleast 40 words";
       isload = false;
-      save = false;
+      show_save = false;
     } else {
       sendLongText(widget.text);
     }
@@ -71,10 +72,10 @@ class _SummaryyState extends State<Summaryy> {
         isload = false;
       });
     } catch (e) {
-      summ = "Sorry could not summarize the given text.";
+      summ = "Sorry could not summarize.";
       setState(() {
         isload = false;
-        save = false;
+        show_save = false;
       });
       print(summ);
       print(e);
@@ -98,15 +99,21 @@ class _SummaryyState extends State<Summaryy> {
         uid: uid,
         // username: username,
       );
-      // if (res == "success") {
-      //   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-      //     content: Text("Posted"),
-      //   ));
-      // } else {
-      //   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-      //     content: Text("res"),
-      //   ));
-      // }
+      if (res == "success") {
+        final snackBar = SnackBar(
+          duration: Duration(milliseconds: 500),
+          backgroundColor: Color.fromARGB(255, 79, 158, 160),
+          content: Center(child: Text('Summary saved')),
+        );
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      } else {
+        final snackBar = SnackBar(
+          duration: Duration(milliseconds: 500),
+          backgroundColor: Color.fromARGB(255, 79, 158, 160),
+          content: Center(child: Text('Could not save summary')),
+        );
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      }
       print('$res + LOLOLOL');
     } catch (err) {
       showSnackBar(err.toString(), context);
@@ -124,6 +131,7 @@ class _SummaryyState extends State<Summaryy> {
           resizeToAvoidBottomInset: false,
           body: isload
               ? Container(
+                color: Colors.white,
                   child: const Center(child: CircularProgressIndicator()))
               : Stack(
                   children: [
@@ -192,14 +200,13 @@ class _SummaryyState extends State<Summaryy> {
                             ),
                           ),
                           const SizedBox(
-                            height: 80,
+                            height: 50,
                           ),
                           Container(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10),
+                              padding: EdgeInsets.symmetric(horizontal: 80),
                               height: 50,
                               width: double.infinity,
-                              child: ElevatedButton(
+                              child: !show_save?null:ElevatedButton(
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: const Color.fromARGB(
                                       255, 86, 166, 167), // Background color
@@ -248,6 +255,19 @@ class _SummaryyState extends State<Summaryy> {
                                                 // user.username
                                               );
                                               Navigator.of(context).pop();
+                                              // final snackBar = SnackBar(
+                                              //         duration: Duration(
+                                              //             milliseconds: 200),
+                                              //         backgroundColor:
+                                              //             Color.fromARGB(255,
+                                              //                 79, 158, 160),
+                                              //         content: Center(
+                                              //             child: Text(
+                                              //                 'Summary saved')),
+                                              //       );
+                                              //       ScaffoldMessenger.of(
+                                              //               context)
+                                              //           .showSnackBar(snackBar);
                                             },
                                           ),
                                         ],
@@ -266,7 +286,37 @@ class _SummaryyState extends State<Summaryy> {
                                         fontWeight: FontWeight.w600),
                                   ),
                                 ),
-                              ))
+                              )
+                              ),
+                              SizedBox(height: 30,),
+                              Container(
+                              padding: EdgeInsets.symmetric(horizontal: 80),
+                              height: 50,
+                              width: double.infinity,
+                              child: !show_save
+                                  ? null
+                                  : ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: const Color.fromARGB(
+                                            255,
+                                            86,
+                                            166,
+                                            167), // Background color
+                                      ),
+                                      onPressed: (){
+                                        Clipboard.setData(ClipboardData(text: summ));
+                                      },
+                                      child: Text(
+                                        'Copy summary',
+                                        style: GoogleFonts.poppins(
+                                          textStyle: const TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.w600),
+                                        ),
+                                      ),
+                                    )
+                                    ),
                         ],
                       ),
                     ),

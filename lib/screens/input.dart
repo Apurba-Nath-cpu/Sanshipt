@@ -87,7 +87,7 @@ class _InputState extends State<Input> {
                     height: 70,
                   ),
                   Container(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      padding: EdgeInsets.symmetric(horizontal:80),
                       height: 50,
                       width: double.infinity,
                       child: ElevatedButton(
