@@ -26,7 +26,7 @@ class _SummaryyState extends State<Summaryy> {
   @override
   bool show_save=true;
   bool isload = true;
-  String summ = "dvbtgn";
+  String summ = "";
   String title = "";
   @override
   void initState() {
@@ -54,19 +54,22 @@ class _SummaryyState extends State<Summaryy> {
     String url = apiUrl;
     print('res start');
     try {
+      print(widget.type);
       final response = await http.post(Uri.parse(url),
           headers: {'Content-Type': 'application/json'},
-          // body: {}
           body: jsonEncode({
-            'input_text': input_text,
-            'model': 'T5',
-            'min_length': 10,
-            'max_length': 80,
-            'input_type': widget.type,
+            'text': input_text,
+            // 'model': 'T5',
+            // 'min_length': 10,
+            // 'max_length': 80,
+            'sourcetype': widget.type
             //'input_type': 'text',
-          }));
+          })
+          );
 
-      summ = ('${jsonDecode(response.body)['output_text']}');
+      // summ = ('${jsonDecode(response.body)['output_text']}');
+      summ = response.body;
+      print(response.body);
       print(summ);
       setState(() {
         isload = false;
@@ -247,14 +250,16 @@ class _SummaryyState extends State<Summaryy> {
                                               ),
                                             ),
                                             onPressed: () {
+                                              print("ye wala onpress execute hua h");
                                               print(user);
                                               print(title);
+                                              Navigator.of(context).pop();
                                               uploadSummary(
                                                 title, summ,
                                                 user!.uid,
                                                 // user.username
                                               );
-                                              Navigator.of(context).pop();
+                                              
                                               // final snackBar = SnackBar(
                                               //         duration: Duration(
                                               //             milliseconds: 200),

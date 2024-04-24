@@ -158,7 +158,7 @@ class _HomeState extends State<Home> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) => Input(
-                                                      input_type: "text",
+                                                      input_type: "TEXT",
                                                     )),
                                           );
                                         },
@@ -188,7 +188,7 @@ class _HomeState extends State<Home> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) => Input(
-                                                      input_type: "url",
+                                                      input_type: "URL",
                                                     )),
                                           );
                                         },
