@@ -8,7 +8,6 @@ import 'package:sanshipt/providers/user_provider.dart';
 import 'package:sanshipt/responsive/mobile_screen_layout.dart';
 import 'package:sanshipt/responsive/responsive_layout.dart';
 import 'package:sanshipt/responsive/web_screen_layout.dart';
-import 'package:sanshipt/screens/home.dart';
 import 'package:sanshipt/screens/signup.dart';
 
 void main() async {
@@ -42,26 +41,6 @@ class MyApp extends StatefulWidget {
   State<MyApp> createState() => _MyAppState();
 }
 
-// class _MyAppState extends State<MyApp> {
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       debugShowCheckedModeBanner: false,
-//       home: StreamBuilder<User?>(
-//         stream: FirebaseAuth.instance.authStateChanges(),
-//         builder: (context, snapshot) {
-//           if(snapshot.hasData){
-//             return Home();
-//           }
-//           else{
-//             return Signup()
-//           }
-//         },
-//       ),
-//     );
-//   }
-// }
 
 class _MyAppState extends State<MyApp> {
   @override
